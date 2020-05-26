@@ -48,7 +48,7 @@ import createTree from './createTree';
     container = null;
   });
 
-  it('test chronoscope', () => {
+  it('test treeGraph', () => {
 
     act(() =>{
       console.log("container -", container);
