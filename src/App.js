@@ -4,12 +4,11 @@ import ReactDOM from 'react-dom';
 export default class App extends React.Component {
     render() {
         return (
-            React.createElement('h1', null, "Hello Playground")
+            <h1>Hello Playground</h1>
         );
     }
 }
 
-ReactDOM.render(
-    React.createElement(App, null),
+ReactDOM.render(<App/>,
     document.getElementById('app')
 )

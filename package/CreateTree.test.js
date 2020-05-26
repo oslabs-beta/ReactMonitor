@@ -56,7 +56,7 @@ import createTree from './createTree';
     });
 
     const treeGraph = createTree(container);
-    console.log("treeGraph -", treeGraph);
+    console.log("treeGraph -", JSON.stringify(treeGraph));
 
     expect(container.innerHTML).toBe('<div><div><p>Hello</p><button>Click me</button></div></div>')
 });
