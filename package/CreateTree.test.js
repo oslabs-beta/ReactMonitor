@@ -35,16 +35,3 @@ describe('test treeGraph', () => {
     expect(treeGraph.children[0].children[1].children[0].children.length).toBe(3); 
   });
 })
-
-
-
-
-
-it('test treeGraph', () => {
-  act(() => {
-    console.log('container -', container);
-    ReactDOM.render(<App />, container);
-  });
-
-  const treeGraph = createTree(container);
-});
