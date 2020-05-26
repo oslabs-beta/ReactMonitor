@@ -41,7 +41,8 @@ class Node {
 
 function JSONStringify(object) {
   let cache = [];
-  const string = JSON.stringify(object,
+  const string = JSON.stringify(
+    object,
     // custom replacer - gets around "TypeError: Converting circular structure to JSON"
     (key, value) => {
       if (typeof value === 'object' && value !== null) {
@@ -53,7 +54,9 @@ function JSONStringify(object) {
         cache.push(value);
       }
       return value;
-    }, 4);
+    },
+    4
+  );
   cache = null; // garbage collection
   return string;
 }
@@ -71,8 +74,20 @@ function treeCreator(hostRoot) {
         // push the new Node to the treeGraph.children array
         // the parent will the tree graph we are currently working with (do the type check for elements that are functions or html elements)
         let newGraphNode = treeGraph;
-        if (typeof fiber.child.type !== 'object' && (fiber.child.child ? typeof fiber.child.child.type !== 'object' : true)) {
-          newGraphNode = new Node(fiber.child.key || (fiber.child.type ? fiber.child.type.name : fiber.child.type) || fiber.child.type, treeGraph, [], fiber.child);
+        if (
+          typeof fiber.child.type !== 'object' &&
+          (fiber.child.child
+            ? typeof fiber.child.child.type !== 'object'
+            : true)
+        ) {
+          newGraphNode = new Node(
+            fiber.child.key ||
+              (fiber.child.type ? fiber.child.type.name : fiber.child.type) ||
+              fiber.child.type,
+            treeGraph,
+            [],
+            fiber.child
+          );
           treeGraph.children.push(newGraphNode);
         }
         // recursively invoke the helper on child
@@ -81,9 +96,23 @@ function treeCreator(hostRoot) {
       // check if fiber.sibling !== null - traverse
       if (fiber.sibling) {
         let newGraphNode = treeGraph;
-        if (typeof fiber.sibling.type !== 'object' && (fiber.sibling.child ? typeof fiber.sibling.child.type !== 'object' : true)) {
+        if (
+          typeof fiber.sibling.type !== 'object' &&
+          (fiber.sibling.child
+            ? typeof fiber.sibling.child.type !== 'object'
+            : true)
+        ) {
           // create new GraphNode based on it with parent being a treeGraph.parent
-          newGraphNode = new Node(fiber.sibling.key || (fiber.sibling.type ? fiber.sibling.type.name : fiber.sibling.type) || fiber.sibling.type, treeGraph.parent, [], fiber.sibling);
+          newGraphNode = new Node(
+            fiber.sibling.key ||
+              (fiber.sibling.type
+                ? fiber.sibling.type.name
+                : fiber.sibling.type) ||
+              fiber.sibling.type,
+            treeGraph.parent,
+            [],
+            fiber.sibling
+          );
           // push the node on to the treeGraph.parent.children array
           treeGraph.parent.children.push(newGraphNode);
         }
@@ -126,8 +155,14 @@ function treeCreator(hostRoot) {
         node.nodeSvgShape.shapeProps = parentShapeProps;
         delete node.stats.state;
         delete node.stats.props;
-      } else if (prevNode.stats.state === node.stats.state && prevNode.stats.props === node.stats.props) {
-        if ((node.stats.effectTag === 0 || node.stats.effectTag === 4) && wasMounted) {
+      } else if (
+        prevNode.stats.state === node.stats.state &&
+        prevNode.stats.props === node.stats.props
+      ) {
+        if (
+          (node.stats.effectTag === 0 || node.stats.effectTag === 4) &&
+          wasMounted
+        ) {
           node.nodeSvgShape.shapeProps.fill = 'gray';
         } else {
           node.nodeSvgShape.shapeProps.fill = 'red';
@@ -141,7 +176,11 @@ function treeCreator(hostRoot) {
       // recursively invoke the function for each children
       if (node.children.length) {
         for (let i = 0; i < node.children.length; i += 1) {
-          compareStateAndProps(node.children[i], prevNode.children[i], node.nodeSvgShape.shapeProps);
+          compareStateAndProps(
+            node.children[i],
+            prevNode.children[i],
+            node.nodeSvgShape.shapeProps
+          );
         }
       }
     } else if (node) {
@@ -154,7 +193,11 @@ function treeCreator(hostRoot) {
       // recursively invoke the function for each children
       if (node.children.length) {
         for (let i = 0; i < node.children.length; i += 1) {
-          compareStateAndProps(node.children[i], null, node.nodeSvgShape.shapeProps);
+          compareStateAndProps(
+            node.children[i],
+            null,
+            node.nodeSvgShape.shapeProps
+          );
         }
       }
     }
@@ -181,9 +224,8 @@ function treeCreator(hostRoot) {
 }
 
 module.exports = function (container) {
-  console.log("container -", container);
+  console.log('container -', container);
   const fiberRoot = container._reactRootContainer._internalRoot;
   //const hostRoot = fiberRoot.current;
-  const tree = treeCreator(fiberRoot.current);
-  return tree;
+  return treeCreator(fiberRoot.current);
 };
