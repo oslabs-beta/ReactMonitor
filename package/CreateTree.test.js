@@ -58,7 +58,7 @@ import createTree from './createTree';
     const treeGraph = createTree(container);
     console.log("treeGraph -", treeGraph);
 
-    expect(container.innerHTML).toBe('<p>Hello</p><button>Click me</button>')
+    expect(container.innerHTML).toBe('<div><div><p>Hello</p><button>Click me</button></div></div>')
 });
 
 
