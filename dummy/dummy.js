@@ -1,34 +1,127 @@
-{"name":"TicTacToe","children":
-"name":"div","children":
-"name":"h1","children":[],"stats":{"effectTag":0,"type":"string","renderStart":"-1.00","renderTotal":"0.00"},"nodeSvgShape":{"shape":"ellipse","shapeProps":{"rx":10,"ry":10,"fill":"lightgreen"}}},{"name":"div","children":
-"name":"row0","children":
-
-"name":"row0box0","children":[],"stats":{"effectTag":0,"type":"string","renderStart":"-1.00","renderTotal":"0.00"},"nodeSvgShape":{"shape":"ellipse","shapeProps":{"rx":10,"ry":10,"fill":"lightgreen"}}},
-
-{"name":"row0box1","children":[],"stats":{"effectTag":0,"type":"string","renderStart":"-1.00","renderTotal":"0.00"},"nodeSvgShape":{"shape":"ellipse","shapeProps":{"rx":10,"ry":10,"fill":"lightgreen"}}},
-
-{"name":"row0box2","children":[],"stats":{"effectTag":0,"type":"string","renderStart":"-1.00","renderTotal":"0.00"},"nodeSvgShape":{"shape":"ellipse","shapeProps":{"rx":10,"ry":10,"fill":"lightgreen"}}}],
-
-"stats":{"effectTag":0,"type":"string","renderStart":"-1.00","renderTotal":"0.00"},"nodeSvgShape":{"shape":"ellipse","shapeProps":{"rx":10,"ry":10,"fill":"lightgreen"}}},
-
-{"name":"row1","children":
-
-"name":"row1box0","children":[],"stats":{"effectTag":0,"type":"string","renderStart":"-1.00","renderTotal":"0.00"},"nodeSvgShape":{"shape":"ellipse","shapeProps":{"rx":10,"ry":10,"fill":"lightgreen"}}},
-
-{"name":"row1box1","children":[],"stats":{"effectTag":0,"type":"string","renderStart":"-1.00","renderTotal":"0.00"},"nodeSvgShape":{"shape":"ellipse","shapeProps":{"rx":10,"ry":10,"fill":"lightgreen"}}},
-
-{"name":"row1box2","children":[],"stats":{"effectTag":0,"type":"string","renderStart":"-1.00","renderTotal":"0.00"},"nodeSvgShape":{"shape":"ellipse","shapeProps":{"rx":10,"ry":10,"fill":"lightgreen"}}}],
-
-"stats":{"effectTag":0,"type":"string","renderStart":"-1.00","renderTotal":"0.00"},"nodeSvgShape":{"shape":"ellipse","shapeProps":{"rx":10,"ry":10,"fill":"lightgreen"}}},
-
-{"name":"row2","children":
-
-"name":"row2box0","children":[],"stats":{"effectTag":0,"type":"string","renderStart":"-1.00","renderTotal":"0.00"},"nodeSvgShape":{"shape":"ellipse","shapeProps":{"rx":10,"ry":10,"fill":"lightgreen"}}},
-
-{"name":"row2box1","children":[],"stats":{"effectTag":0,"type":"string","renderStart":"-1.00","renderTotal":"0.00"},"nodeSvgShape":{"shape":"ellipse","shapeProps":{"rx":10,"ry":10,"fill":"lightgreen"}}},
-
-{"name":"row2box2","children":[],"stats":{"effectTag":0,"type":"string","renderStart":"-1.00","renderTotal":"0.00"},"nodeSvgShape":{"shape":"ellipse","shapeProps":{"rx":10,"ry":10,"fill":"lightgreen"}}}],
-
-"stats":{"effectTag":0,"type":"string","renderStart":"-1.00","renderTotal":"0.00"},"nodeSvgShape":{"shape":"ellipse","shapeProps":{"rx":10,"ry":10,"fill":"lightgreen"}}}],
-
-"stats":{"effectTag":0,"type":"string","renderStart":"-1.00","renderTotal":"0.00"},"nodeSvgShape":{"shape":"ellipse","shapeProps":{"rx":10,"ry":10,"fill":"lightgreen"}}}],"stats":{"effectTag":0,"type":"string","renderStart":"-1.00","renderTotal":"0.00"},"nodeSvgShape":{"shape":"ellipse","shapeProps":{"rx":10,"ry":10,"fill":"lightgreen"}}}],"stats":{"state":"null","props":"{}","effectTag":1,"type":"function","renderStart":"-1.00","renderTotal":"0.00"},"nodeSvgShape":{"shape":"ellipse","shapeProps":{"rx":10,"ry":10,"fill":"lightgreen"}}}
+container - HTMLDivElement {
+  '__reactContainere$3ovmxfu0tzp': FiberNode {
+    tag: 3,
+    key: null,
+    elementType: null,
+    type: null,
+    stateNode: FiberRootNode {
+      tag: 0,
+      current: [FiberNode],
+      containerInfo: [Circular],
+      pendingChildren: null,
+      pingCache: null,
+      finishedExpirationTime: 0,
+      finishedWork: null,
+      timeoutHandle: -1,
+      context: {},
+      pendingContext: null,
+      hydrate: false,
+      callbackNode: null,
+      callbackPriority: 90,
+      firstPendingTime: 0,
+      firstSuspendedTime: 0,
+      lastSuspendedTime: 0,
+      nextKnownPendingLevel: 0,
+      lastPingedTime: 0,
+      lastExpiredTime: 0,
+      interactionThreadID: 1,
+      memoizedInteractions: Set {},
+      pendingInteractionMap: Map {},
+      callbackExpirationTime: 0
+    },
+    return: null,
+    child: null,
+    sibling: null,
+    index: 0,
+    ref: null,
+    pendingProps: null,
+    memoizedProps: null,
+    updateQueue: {
+      baseState: null,
+      baseQueue: [Object],
+      shared: [Object],
+      effects: null
+    },
+    memoizedState: null,
+    dependencies: null,
+    mode: 0,
+    effectTag: 0,
+    nextEffect: null,
+    firstEffect: null,
+    lastEffect: null,
+    expirationTime: 1073741823,
+    childExpirationTime: 0,
+    alternate: FiberNode {
+      tag: 3,
+      key: null,
+      elementType: null,
+      type: null,
+      stateNode: [FiberRootNode],
+      return: null,
+      child: [FiberNode],
+      sibling: null,
+      index: 0,
+      ref: null,
+      pendingProps: null,
+      memoizedProps: null,
+      updateQueue: [Object],
+      memoizedState: [Object],
+      dependencies: null,
+      mode: 0,
+      effectTag: 0,
+      nextEffect: null,
+      firstEffect: [FiberNode],
+      lastEffect: [FiberNode],
+      expirationTime: 0,
+      childExpirationTime: 0,
+      alternate: [Circular],
+      actualDuration: 0,
+      actualStartTime: -1,
+      selfBaseDuration: 0,
+      treeBaseDuration: 0,
+      _debugID: 1,
+      _debugIsCurrentlyTiming: false,
+      _debugSource: null,
+      _debugOwner: null,
+      _debugNeedsRemount: false,
+      _debugHookTypes: null
+    },
+    actualDuration: 0,
+    actualStartTime: -1,
+    selfBaseDuration: 0,
+    treeBaseDuration: 0,
+    _debugID: 1,
+    _debugIsCurrentlyTiming: false,
+    _debugSource: null,
+    _debugOwner: null,
+    _debugNeedsRemount: false,
+    _debugHookTypes: null
+  },
+  _reactRootContainer: ReactDOMBlockingRoot {
+    _internalRoot: FiberRootNode {
+      tag: 0,
+      current: [FiberNode],
+      containerInfo: [Circular],
+      pendingChildren: null,
+      pingCache: null,
+      finishedExpirationTime: 0,
+      finishedWork: null,
+      timeoutHandle: -1,
+      context: {},
+      pendingContext: null,
+      hydrate: false,
+      callbackNode: null,
+      callbackPriority: 90,
+      firstPendingTime: 0,
+      firstSuspendedTime: 0,
+      lastSuspendedTime: 0,
+      nextKnownPendingLevel: 0,
+      lastPingedTime: 0,
+      lastExpiredTime: 0,
+      interactionThreadID: 1,
+      memoizedInteractions: Set {},
+      pendingInteractionMap: Map {},
+      callbackExpirationTime: 0
+    }
+  }
+}

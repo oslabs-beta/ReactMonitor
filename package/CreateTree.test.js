@@ -13,7 +13,6 @@ import TicTacToe from '../mockData/ticTacToe'
       </div>
     )
   }
-
   function Button({children}){
     return (
       <button>
@@ -21,7 +20,6 @@ import TicTacToe from '../mockData/ticTacToe'
       </button>
     )
   }
-
   class App extends React.Component{
     render() {
       return (
@@ -36,32 +34,54 @@ import TicTacToe from '../mockData/ticTacToe'
 
     }
   }
-
+  
   let container;
-
-  beforeEach(() => {
-    container = document.createElement('div');
-    document.body.appendChild(container);
-  });
-
-  afterEach(() => {
-    document.body.removeChild(container);
-    container = null;
-  });
-
-  it('test treeGraph', () => {
-
-    act(() =>{
-      console.log("container -", container);
+  let treeGraph;
+  
+  describe('test treeGraph', () => {
+    
+    beforeAll(() => {
+      container = document.createElement('div');
+      document.body.appendChild(container);
+      act(() => {
       ReactDOM.render(<TicTacToe />, container);
-    });
+      console.log("container -", container);
+      // console.log("treeGraph -", JSON.stringify(treeGraph));
+      });
+    treeGraph = createTree(container);
+    })
 
-    const treeGraph = createTree(container);
-    // console.log("treeGraph -", JSON.stringify(treeGraph));
-    console.log("length of treeGraph", treeGraph.children[0].children[1].children.length); // ==> 3
+
+    // beforeEach(() => {
+      //   container = document.createElement('div');
+      //   document.body.appendChild(container);
+      // });
+      
+    afterAll(() => {
+      document.body.removeChild(container);
+      container = null;
+    });     
+    it("Test if 3 row elements are created on the page", () => {
+      // console.log('inside first it treegraph: ', treeGraph)
+      expect(treeGraph.children[0].children[1].children.length).toBe(3); // ==> 3 (number of Rows)
+    });
+    it("Test if the third row also has 3 elements (buttons)", () => {
+      expect(treeGraph.children[0].children[1].children[0].children.length).toBe(3); // ==> 3 (number of Bixes in the row)
+    });
+  })
     // expect(container.innerHTML).toBe('<div><div><p>Hello</p><button>Click me</button></div></div>')
 
-});
+
+      // console.log('inside first it treegraph: ', treeGraph)
+      expect(treeGraph.children[0].children[1].children.length).toBe(3); // ==> 3 (number of Rows)
+    });
+    it("Test if the third row also has 3 elements (buttons)", () => {
+      expect(treeGraph.children[0].children[1].children[0].children.length).toBe(3); // ==> 3 (number of Bixes in the row)
+    });
+  })
+    // expect(container.innerHTML).toBe('<div><div><p>Hello</p><button>Click me</button></div></div>')
+
+
 
 
 
