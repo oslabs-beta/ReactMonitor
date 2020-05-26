@@ -27,7 +27,6 @@ describe('test treeGraph', () => {
   });     
 
   it("Test if 3 row elements are created on the page", () => {
-
     expect(treeGraph.children[0].children[1].children.length).toBe(3); 
   });
 
