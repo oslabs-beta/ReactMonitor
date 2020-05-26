@@ -36,13 +36,6 @@ describe('test treeGraph', () => {
   });
 })
 
-    expect(treeGraph.children[0].children[1].children.length).toBe(3); 
-  });
-
-  it("Test if the third row also has 3 elements (buttons)", () => {
-    expect(treeGraph.children[0].children[1].children[0].children.length).toBe(3); 
-  });
-})
 
 
 
