@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { act } from 'react-dom/test-utils';
 // import chronoscope from 'react-chronoscope';
 import createTree from './createTree';
+import TicTacToe from '../mockData/ticTacToe'
 
   function Dialog({children}){
     return(
@@ -52,13 +53,14 @@ import createTree from './createTree';
 
     act(() =>{
       console.log("container -", container);
-      ReactDOM.render(<App />, container);
+      ReactDOM.render(<TicTacToe />, container);
     });
 
     const treeGraph = createTree(container);
-    console.log("treeGraph -", JSON.stringify(treeGraph));
+    // console.log("treeGraph -", JSON.stringify(treeGraph));
+    console.log("length of treeGraph", treeGraph.children[0].children[1].children.length); // ==> 3
+    // expect(container.innerHTML).toBe('<div><div><p>Hello</p><button>Click me</button></div></div>')
 
-    expect(container.innerHTML).toBe('<div><div><p>Hello</p><button>Click me</button></div></div>')
 });
 
 

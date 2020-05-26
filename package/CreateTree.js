@@ -184,6 +184,5 @@ module.exports = function (container) {
   console.log("container -", container);
   const fiberRoot = container._reactRootContainer._internalRoot;
   //const hostRoot = fiberRoot.current;
-  const tree = treeCreator(fiberRoot.current);
-  return tree;
+  return treeCreator(fiberRoot.current);
 };
