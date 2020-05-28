@@ -8,17 +8,6 @@ export default class TreeWrapper extends Component {
     });
   }
 
-  // ensures that component doesn't automatically rerender
-  // shouldComponentUpdate() {
-  //   return false;
-  // }
-
-  // fires when a component receives props, but before any rerendering takes place
-  // componentDidUpdate(nextProps) {
-  //   // main input (state/props) for the tree should be input to the update func
-  //   this.state.tree.update(nextProps.gender);
-  // }
-
   render() {
     return <div ref="tree"></div>;
   }
