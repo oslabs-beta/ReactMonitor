@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Tree from './components/Tree';
+import TreeWrapper from './components/TreeWrapper';
 
 export default class App extends React.Component {
   render() {
     return (
       <div>
         <h1>Hello Playground</h1>
-        <Tree />
+        <TreeWrapper />
       </div>
     );
   }
