@@ -42,6 +42,7 @@ export default class Tree extends Component {
     const data = d3.hierarchy(testRoot);
     // console.log(data);
     const treeChart = d3.tree();
+    treeChart.size([400, 200])
     const root = treeChart(data);
     // console.log(root);
   }
@@ -50,7 +51,9 @@ export default class Tree extends Component {
     return (
       <div>
         <h1>HELLO FROM THE TREE</h1>
-        <div>{this.root}</div>
+        <div>
+          {this.root}
+          </div>
       </div>
     );
   }
