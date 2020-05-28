@@ -24,6 +24,13 @@ export default {
         {
           name: 'Enoch',
         },
+        { name: 'Paard' },
+        { name: 'Koe' },
+        { name: 'Aardappel' },
+        { name: 'Boskabouter' },
+        { name: 'Ezel' },
+        { name: 'Hond' },
+        { name: 'Kat' },
       ],
     },
     {

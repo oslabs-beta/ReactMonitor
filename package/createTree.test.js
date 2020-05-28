@@ -17,6 +17,7 @@ describe('test treeGraph', () => {
     });
 
     treeGraph = createTree(container);
+    console.log(treeGraph);
   });
 
   afterAll(() => {
