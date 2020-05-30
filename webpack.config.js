@@ -8,7 +8,7 @@ module.exports = {
     backgroundScript: './src/extension/backgroundScript.js',
     contentScript: './src/extension/contentScript.js',
     devtools: './src/extension/devtools.js',
-    bundle: './src/app/App.jsx',
+    bundle: './src/app/App.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

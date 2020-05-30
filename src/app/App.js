@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TreeWrapper from './components/TreeWrapper.js';
+import TreeWrapper from './components/TreeWrapper';
 
 export default class App extends React.Component {
   render() {
