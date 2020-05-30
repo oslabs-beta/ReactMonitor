@@ -21,6 +21,10 @@ class Node {
         fill: 'lightgreen',
       },
     };
+    if (typeof this.type === "string") {
+      this.type = fiber.type;
+    }
+    this.tag = fiber.tag;
   }
 
   initializeProps(fiber) {
