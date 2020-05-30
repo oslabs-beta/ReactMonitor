@@ -72,7 +72,6 @@ function treeCreator(hostRoot) {
   function treeGraphFromHostRootCreator(fiber) {
     // create a treeGraph
     const treeGraph = new Node(fiber.type.name, null, [], fiber); // Represent the top most Element (like App);
-    console.log("First - fiber.type.name =", fiber.type.name);
     const helper = (fiber, treeGraph) => {
       // check if fiber.child !== null - traverse
       if (fiber.child) {
@@ -93,7 +92,6 @@ function treeCreator(hostRoot) {
             [],
             fiber.child
           );
-          console.log("fiber.child - fiber.type.name =", fiber.type.name);
           treeGraph.children.push(newGraphNode);
         }
         // recursively invoke the helper on child
@@ -119,7 +117,6 @@ function treeCreator(hostRoot) {
             [],
             fiber.sibling
           );
-          console.log("fiber.sibling - fiber.type.name =", fiber.type.name);
           // push the node on to the treeGraph.parent.children array
           treeGraph.parent.children.push(newGraphNode);
         }
