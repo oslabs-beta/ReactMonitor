@@ -10,6 +10,8 @@
     ]
   },
   "scripts": {
+    "clean": "rm -rf dist && cpy src/extension/manifest.json dist",
+    "build": "NODE_ENV=production webpack",
     "start": "webpack-dev-server --open",
     "test": "jest"
   },
@@ -24,6 +26,7 @@
   },
   "homepage": "https://github.com/simple-sifu/ReactMonitor#readme",
   "dependencies": {
+    "cpy-cli": "^3.1.1",
     "d3": "^5.16.0",
     "d3-hierarchy": "^1.1.9",
     "react": "^16.13.1",
