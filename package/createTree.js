@@ -21,6 +21,10 @@ class Node {
         fill: 'lightgreen',
       },
     };
+    if (typeof this.type === "string") {
+      this.type = fiber.type;
+    }
+    this.tag = fiber.tag;
   }
 
   initializeProps(fiber) {
@@ -123,6 +127,7 @@ function treeCreator(hostRoot) {
     };
     // invoke the helper function
     helper(fiber, treeGraph); // fiber is an App Fiber
+    console.log("treeGraph =", treeGraph);
     return treeGraph;
   }
   let treeGraph;
