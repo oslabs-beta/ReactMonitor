@@ -1,22 +1,48 @@
+import React, { Component } from 'react';
 import * as d3 from 'd3';
-import mockTree from './mockTree';
 
-const width = 500;
+let root;
 
-const data = mockTree;
+export default class D3Tree extends Component {
+  constructor(props) {
+    super(props);
+    this.treeRef = React.createRef();
+    this.maked3Tree = this.maked3Tree.bind(this);
+    this.removed3Tree = this.removed3Tree.bind(this);
+    this.width = 500
+  }
 
-const tree = (data) => {
-  const root = d3.hierarchy(data);
-  root.dx = 10;
-  root.dy = width / (root.height + 1);
-  return d3.tree().nodeSize([root.dx, root.dy])(root);
-};
+  componentDidMount() {
+    const { name, children } = this.props;
+    const hierarchy = { name, children };
+    root = JSON.parse(JSON.stringify(hierarchy));
+    this.maked3Tree(root);
+  }
 
-export default class D3Tree {
-  constructor(element) {
-    const root = tree(data);
-    console.log('this is the data: ', data);
-    console.log('this is the root val: ', root);
+  componentDidUpdate() {
+    const { name, children } = this.props;
+    const hierarchy = { name, children };
+    root = JSON.parse(JSON.stringify(hierarchy));
+    this.maked3Tree(root);
+  }
+
+  removed3Tree() {
+    const { current } = this.treeRef;
+    while (current.hasChildNodes()) {
+      current.removeChild(current.lastChild);
+    }
+  }
+
+  tree(data) {
+    const root = d3.hierarchy(data);
+    root.dx = 10;
+    root.dy = this.width / (root.height + 1);
+    return d3.tree().nodeSize([root.dx, root.dy])(root);
+  };
+
+  maked3Tree(data) {
+    this.removed3Tree();
+    const root = this.tree(data);
 
     let x0 = 0;
     let x1 = -x0;
@@ -26,9 +52,9 @@ export default class D3Tree {
     });
 
     const svg = d3
-      .select(element)
+      .select(this.treeRef.current)
       .append('svg')
-      .attr('viewBox', [0, 0, width, x1 - x0 + root.dx * 2]);
+      .attr('viewBox', [0, 0, this.width, x1 - x0 + root.dx * 2]);
 
     const g = svg
       .append('g')
@@ -78,5 +104,9 @@ export default class D3Tree {
       .clone(true)
       .lower()
       .attr('stroke', 'white');
+  }
+
+  render() {
+    return <div ref={this.treeRef}></div>;
   }
 }
