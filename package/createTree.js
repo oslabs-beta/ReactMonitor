@@ -21,6 +21,10 @@ class Node {
         fill: 'lightgreen',
       },
     };
+    if (typeof this.type === "string") {
+      this.type = fiber.type;
+    }
+    this.tag = fiber.tag;
   }
 
   initializeProps(fiber) {
@@ -72,7 +76,8 @@ function treeCreator(hostRoot) {
       // check if fiber.child !== null - traverse
       if (fiber.child) {
         // push the new Node to the treeGraph.children array
-        // the parent will the tree graph we are currently working with (do the type check for elements that are functions or html elements)
+        // the parent will the tree graph we are currently working with
+        // (do the type check for elements that are functions or html elements)
         let newGraphNode = treeGraph;
         if (
           typeof fiber.child.type !== 'object' &&
@@ -122,6 +127,7 @@ function treeCreator(hostRoot) {
     };
     // invoke the helper function
     helper(fiber, treeGraph); // fiber is an App Fiber
+    console.log("treeGraph =", treeGraph);
     return treeGraph;
   }
   let treeGraph;
@@ -219,13 +225,36 @@ function treeCreator(hostRoot) {
   compareStateAndProps(treeGraph, prevTreeGraph, null);
   prevTreeGraph = tempTreeGraph;
   wasMounted = true;
-  return treeGraph;
-  //window.postMessage({ action: 'npmToContent', payload: treeGraph });
+  // Sends message to contentscript
+  window.postMessage({ action: 'npmToContent', payload: treeGraph });
 }
 
+// module.exports = function (container) {
+//   // console.log('container -', container);
+//   const fiberRoot = container._reactRootContainer._internalRoot;
+//   //const hostRoot = fiberRoot.current;
+//   return treeCreator(fiberRoot.current);
+// };
+
 module.exports = function (container) {
-  console.log('container -', container);
   const fiberRoot = container._reactRootContainer._internalRoot;
-  //const hostRoot = fiberRoot.current;
-  return treeCreator(fiberRoot.current);
+  const hostRoot = fiberRoot.current;
+
+  setTimeout(() => treeCreator(hostRoot), 500); // needs to wait for the page load
+  window.addEventListener('click', () => {
+    // check if the hostRoot is new - only then invoke
+    setTimeout(() => {
+      if (hostRoot !== fiberRoot.current) {
+        treeCreator(fiberRoot.current);
+      }
+    }, 200);
+  });
+  window.addEventListener('keyup', () => {
+    setTimeout(() => {
+      // check if the hostRoot is new - only then invoke
+      if (hostRoot !== fiberRoot.current) {
+        treeCreator(fiberRoot.current);
+      }
+    }, 200);
+  });
 };

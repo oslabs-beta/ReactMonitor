@@ -4,10 +4,15 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './src/App.js',
+  entry: {
+    backgroundScript: './src/extension/backgroundScript.js',
+    contentScript: './src/extension/contentScript.js',
+    devtools: './src/extension/devtools.js',
+    bundle: './src/app/App.js',
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: '[name].js',
   },
   module: {
     rules: [
@@ -20,14 +25,18 @@ module.exports = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: './src/index.html',
-      filename: './index.html',
+      template: './src/app/index.html',
+      filename: 'index.html',
+      chunks: ['bundle'],
+    }),
+    new HtmlWebPackPlugin({
+      template: './src/extension/devtools.html',
+      filename: 'devtools.html',
+      chunks: ['devtools'],
     }),
     new CopyPlugin({
-      patterns: [
-      { from: './src/style.css' },
-    ],
-  }),
+      patterns: [{ from: './src/app/style.css' }],
+    }),
   ],
   devServer: {
     contentBase: './dist',
