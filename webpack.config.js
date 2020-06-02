@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   mode: 'development',
@@ -21,6 +21,10 @@ module.exports = {
         exclude: /node_modules/,
         use: ['babel-loader'],
       },
+      {
+        test: /\.s[ac]ss$/,
+        use: [MiniCssExtractPlugin.loader || 'style-loader', 'css-loader', 'sass-loader'],
+      },
     ],
   },
   plugins: [
@@ -34,8 +38,12 @@ module.exports = {
       filename: 'devtools.html',
       chunks: ['devtools'],
     }),
-    new CopyPlugin({
-      patterns: [{ from: './src/app/style.css' }],
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      template: './src/app/style.scss',
+      filename: '[name].scss',
+      chunks: '[id].scss',
     }),
   ],
   devServer: {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import MainContainer from './components/mainContainer';
+import './style.scss';
 
 let port;
 
