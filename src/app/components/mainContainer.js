@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TreeWrapper from './TreeWrapper';
+import D3Tree from './d3tree';
 
 export default class MainContainer extends Component {
   constructor(props) {
@@ -9,7 +9,7 @@ export default class MainContainer extends Component {
     return (
       <div>
         <h1>Hello from MainContainer</h1>
-        <TreeWrapper name={this.props.name} children={this.props.children} />
+        <D3Tree name={this.props.name} children={this.props.children} />
       </div>
     );
   }
