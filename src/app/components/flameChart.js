@@ -1,17 +1,17 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 class FlameChart extends Component {
   constructor(props) {
-  super(props);
+    super(props);
   }
 
-  render() { 
+  render() {
     return (
-    <div>
+      <div>
         In progress: Flame Chart
-    </div>  
+      </div>
     );
   }
 }
- 
+
 export default FlameChart;
