@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import MainContainer from './components/mainContainer';
+import './style.scss';
 
 let port;
 
@@ -10,6 +11,7 @@ export default class App extends Component {
     this.state = {
       name: '',
       children: [],
+      stats: '',
     };
   }
 
@@ -20,6 +22,7 @@ export default class App extends Component {
       this.setState({
         name: message.payload.payload.name,
         children: message.payload.payload.children,
+        stats: message.payload.payload.stats,
       });
     });
   }
@@ -31,6 +34,7 @@ export default class App extends Component {
       this.setState({
         name: message.payload.payload.name,
         children: message.payload.payload.children,
+        stats: message.payload.payload.stats,
       });
     });
   }
@@ -38,9 +42,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <h1>{this.state.name}</h1>
-        <h1>Hello From APPJS</h1>
-        <MainContainer name={this.state.name} children={this.state.children} />
+        <MainContainer stats={this.state.stats} name={this.state.name} children={this.state.children} />
       </div>
     );
   }

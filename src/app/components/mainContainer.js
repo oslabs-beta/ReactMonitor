@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import D3Tree from './d3tree';
+import FlameChart from './flameChart'
 
 export default class MainContainer extends Component {
   constructor(props) {
@@ -7,10 +10,22 @@ export default class MainContainer extends Component {
   }
   render() {
     return (
-      <div>
-        <h1>Hello from MainContainer</h1>
-        <D3Tree name={this.props.name} children={this.props.children} />
-      </div>
+      <Router>
+        <div>
+          <div className="navbar">
+            <li><Link to="/">Tree</Link></li>
+            <li><Link to="/chart">Chart</Link></li>
+          </div>
+          <Switch>
+            <Route exact path="/">
+              <D3Tree name={this.props.name} children={this.props.children} />
+            </Route>
+            <Route path="/chart">
+              <FlameChart />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }
