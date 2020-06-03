@@ -1,0 +1,20 @@
+.navbar { 
+  padding: 15px;
+  background: rgb(92, 92, 92);
+  display: flex;
+  justify-content: space-evenly;
+  li {
+    list-style: none;
+    font-size: large;
+    a {
+      text-decoration: none;
+      color: whitesmoke;
+      font-weight: 900;
+    }
+  }
+}
+
+body { 
+  margin: 0;
+  background: whitesmoke;
+}

@@ -11,19 +11,21 @@ export default class MainContainer extends Component {
   render() {
     return (
       <Router>
-      <div className="navbar">
-        <li><Link to="/">Tree</Link></li>
-        <li><Link to="/chart">Chart</Link></li>
-      <Switch>
-        <Route exact path="/">
-          <D3Tree name={this.props.name} children={this.props.children} />  
-        </Route>
-        <Route path="/chart">
-          <FlameChart />
-        </Route>
-      </Switch>
-      </div>
-    </Router>
+        <div>
+          <div className="navbar">
+            <li><Link to="/">Tree</Link></li>
+            <li><Link to="/chart">Chart</Link></li>
+          </div>
+          <Switch>
+            <Route exact path="/">
+              <D3Tree name={this.props.name} children={this.props.children} />
+            </Route>
+            <Route path="/chart">
+              <FlameChart />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }
