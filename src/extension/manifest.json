@@ -13,9 +13,6 @@
       ],
       "js": [
         "contentScript.js"
-      ],
-      "css": [
-        "style.scss"
       ]
     }
   ],
