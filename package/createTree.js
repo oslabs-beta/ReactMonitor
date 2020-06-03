@@ -87,8 +87,8 @@ function treeCreator(hostRoot) {
         ) {
           newGraphNode = new Node(
             fiber.child.key ||
-              (fiber.child.type ? fiber.child.type.name : fiber.child.type) ||
-              fiber.child.type,
+            (fiber.child.type ? fiber.child.type.name : fiber.child.type) ||
+            fiber.child.type,
             treeGraph,
             [],
             fiber.child
@@ -110,10 +110,10 @@ function treeCreator(hostRoot) {
           // create new GraphNode based on it with parent being a treeGraph.parent
           newGraphNode = new Node(
             fiber.sibling.key ||
-              (fiber.sibling.type
-                ? fiber.sibling.type.name
-                : fiber.sibling.type) ||
-              fiber.sibling.type,
+            (fiber.sibling.type
+              ? fiber.sibling.type.name
+              : fiber.sibling.type) ||
+            fiber.sibling.type,
             treeGraph.parent,
             [],
             fiber.sibling
@@ -240,7 +240,8 @@ module.exports = function (container) {
   const fiberRoot = container._reactRootContainer._internalRoot;
   const hostRoot = fiberRoot.current;
 
-  setTimeout(() => treeCreator(hostRoot), 500); // needs to wait for the page load
+  window.addEventListener('load', () => treeCreator(hostRoot))
+  // setTimeout(() => treeCreator(hostRoot), 500); // needs to wait for the page load
   window.addEventListener('click', () => {
     // check if the hostRoot is new - only then invoke
     setTimeout(() => {
