@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import * as flamegraph from 'd3-flame-graph';
 
+
 class FlameChart extends Component {
   constructor(props) {
   super(props);
@@ -8,27 +9,32 @@ class FlameChart extends Component {
   this.createFlameGraph = this.createFlameGraph.bind(this);
   }
 
-  componentDidMount(){
-    const { stats } = props;
-    this.createFlameGraph(stats)
-  }
+  // componentDidMount(){
+  //   const { stats } = this.props;
+  //   this.createFlameGraph(stats)
+  // }
 
-  componentDidUpdate(){
-    const { stats } = props;
-    this.createFlameGraph(stats)
-  }
+  // componentDidUpdate(){
+  //   const { stats } = this.props;
+  //   this.createFlameGraph(stats)
+  // }
 
-  createFlameGraph(data) {
-    const flamegraph = d3.flamegraph(data)
-      .width(960)
+  // createFlameGraph(data) {
+  //   flamegraph(data)
+  //     .width(960)
     
-    d3.json("data.json", function(error, data) {
-      if (error) return console.warn(error);
-      d3.select("#flamegraph")
-        .datum(data)
-        .call(chart);
-    })
-  }
+  //   d3.json("data.json", function(error, data) {
+  //     if (error) return console.warn(error);
+  //     d3.select("#flamegraph")
+  //       .datum(data)
+  //       .call(chart);
+  //   })
+  //   flamegraph.onClick((d)=>{
+  //     console.log(d.data.name)
+  //   })
+  //   flamegraph.setDetailsElement(document.getElementById("details"));
+  // }
+
 
   render() {
     return (
