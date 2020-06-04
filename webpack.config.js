@@ -1,6 +1,5 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -21,6 +20,10 @@ module.exports = {
         exclude: /node_modules/,
         use: ['babel-loader'],
       },
+      {
+        test: /\.s[ac]ss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
     ],
   },
   plugins: [
@@ -33,10 +36,7 @@ module.exports = {
       template: './src/extension/devtools.html',
       filename: 'devtools.html',
       chunks: ['devtools'],
-    }),
-    new CopyPlugin({
-      patterns: [{ from: './src/app/style.css' }],
-    }),
+    })
   ],
   devServer: {
     contentBase: './dist',

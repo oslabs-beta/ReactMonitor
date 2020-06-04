@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, {Component} from 'react';
 import * as flamegraph from 'd3-flame-graph';
 
@@ -27,15 +28,26 @@ class FlameChart extends Component {
         .datum(data)
         .call(chart);
     })
+=======
+import React, { Component } from 'react';
+
+class FlameChart extends Component {
+  constructor(props) {
+    super(props);
+>>>>>>> a2bc8571ba1cb91142f2d01c6130e2d74a4fedb9
   }
 
-  render() { 
+  render() {
     return (
+<<<<<<< HEAD
     <div ref={this.flamegraphRef} className="flamegraph">
+=======
+      <div>
+>>>>>>> a2bc8571ba1cb91142f2d01c6130e2d74a4fedb9
         In progress: Flame Chart
-    </div>  
+      </div>
     );
   }
 }
- 
+
 export default FlameChart;
