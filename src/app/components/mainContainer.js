@@ -17,11 +17,11 @@ export default class MainContainer extends Component {
             <li><Link to="/chart">Chart</Link></li>
           </div>
           <Switch>
-            <Route exact path="/">
-              <D3Tree name={this.props.name} children={this.props.children} />
-            </Route>
             <Route path="/chart">
               <FlameChart />
+            </Route>
+            <Route path="/">
+              <D3Tree name={this.props.name} children={this.props.children} />
             </Route>
           </Switch>
         </div>
