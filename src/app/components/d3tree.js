@@ -28,6 +28,8 @@ export default class D3Tree extends Component {
 
   removed3Tree() {
     const { current } = this.treeRef;
+    console.log(this.treeRef)
+    // document.querySelectorAll('.tooltip').forEach(el => el.remove());
     while (current.hasChildNodes()) {
       current.removeChild(current.lastChild);
     }
@@ -44,6 +46,13 @@ export default class D3Tree extends Component {
     this.removed3Tree();
     const root = this.tree(data);
 
+    const margin = {
+      top: 20,
+      right: 20,
+      bottom: 20,
+      left: 20,
+    }
+
     let x0 = 0;
     let x1 = -x0;
     root.each((d) => {
@@ -54,7 +63,12 @@ export default class D3Tree extends Component {
     const svg = d3
       .select(this.treeRef.current)
       .append('svg')
-      .attr('viewBox', [0, 0, this.width, x1 - x0 + root.dx * 2]);
+      .attr('viewBox', [
+        -margin.left,
+        -margin.top,
+        this.width + margin.left + margin.right,
+        x1 - x0 + root.dx * 2 + margin.top + margin.bottom,
+      ]);
 
     const g = svg
       .append('g')
@@ -88,31 +102,34 @@ export default class D3Tree extends Component {
       .join('g')
       .attr('transform', (d) => `translate(${d.y},${d.x})`);
 
+
+
+
     node
       .append('circle')
       .attr('stroke', (d) => (d.children ? '#555' : '#999'))
       .attr('stroke-width', (d) => 1)
       .attr('fill', () => '#fff')
       .attr('r', 5)
-      
+
       // tooltip MouseOver
       .on('mouseover', function (d) {
         d3.select(this)
           .transition(100)
-          .duration(20)
-          .attr('r', 10);
+          .duration(50)
+          .attr('r', 8);
 
         tooltipDiv.transition()
           .duration(50)
           .style('opacity', 0.9);
 
         // tooltipDiv.html(JSON.stringify(d.data.stateSnapshot.children[0].state), this)
-        tooltipDiv.html(`<p>I'm a tooltip written in HTML</p>
-                         <br>ToolTip<br>`, this)
-          .style('left', d3.select(this).attr("cy") + 'px')
-          .style('top', d3.select(this).attr("cx") + 'px')
-          // .style('left', (d3.event.pageX - 90) + 'px')
-          // .style('top', (d3.event.pageY - 65) + 'px')
+        tooltipDiv.html(`<p><br><strong>STATE</strong>:<br>${Object.entries(JSON.parse(d.data.stats.state)).map(([key, value]) => key + ': ' + value + '<br>')}
+                         <br><strong>PROPS</strong>: ${JSON.stringify(d.data.stats.props)}<br></p>`, this)
+        // .style('left', d3.select(this).attr("cy") + 'px')
+        // .style('top', d3.select(this).attr("cx") + 'px')
+        // .style('left', (d3.event.pageX - 90) + 'px')
+        // .style('top', (d3.event.pageY - 65) + 'px')
       })
       // eslint-disable-next-line no-unused-vars
       .on('mouseout', function (d) {
@@ -139,8 +156,9 @@ export default class D3Tree extends Component {
     // define tooltip
     const tooltipDiv = d3.select('body').append('div')
       .attr('class', 'tooltip')
-      .style('opacity', 0);
+      .style('opacity', 1);
   }
+
 
   render() {
     return <div ref={this.treeRef}></div>;
