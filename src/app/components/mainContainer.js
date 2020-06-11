@@ -18,7 +18,7 @@ export default class MainContainer extends Component {
           </div>
           <Switch>
             <Route path="/chart">
-              <FlameChart />
+              <FlameChart stats={this.props.stats}/>
             </Route>
             <Route path="/">
               <D3Tree name={this.props.name} children={this.props.children} />

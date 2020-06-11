@@ -18,22 +18,21 @@ export default class D3Tree extends Component {
     root = JSON.parse(JSON.stringify(hierarchy));
     this.maked3Tree(root);
   }
-
+  
   componentDidUpdate() {
     const { name, children } = this.props;
     const hierarchy = { name, children };
     root = JSON.parse(JSON.stringify(hierarchy));
     this.maked3Tree(root);
+    console.log('in component did mount')
   }
 
-  componentWillUnmount() {
+  componentWillUnmount(){
     this.removed3Tree();
   }
-
   removed3Tree() {
     const { current } = this.treeRef;
-    // console.log(this.treeRef)
-    // document.querySelectorAll('.tooltip').forEach(el => el.remove());
+    document.querySelectorAll('.tooltip').forEach(el => el.remove());
     while (current.hasChildNodes()) {
       current.removeChild(current.lastChild);
     }
