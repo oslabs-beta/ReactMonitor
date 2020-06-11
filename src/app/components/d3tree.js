@@ -26,9 +26,13 @@ export default class D3Tree extends Component {
     this.maked3Tree(root);
   }
 
+  componentWillUnmount() {
+    this.removed3Tree();
+  }
+
   removed3Tree() {
     const { current } = this.treeRef;
-    console.log(this.treeRef)
+    // console.log(this.treeRef)
     // document.querySelectorAll('.tooltip').forEach(el => el.remove());
     while (current.hasChildNodes()) {
       current.removeChild(current.lastChild);
@@ -102,9 +106,6 @@ export default class D3Tree extends Component {
       .join('g')
       .attr('transform', (d) => `translate(${d.y},${d.x})`);
 
-
-
-
     node
       .append('circle')
       .attr('stroke', (d) => (d.children ? '#555' : '#999'))
@@ -124,18 +125,16 @@ export default class D3Tree extends Component {
           .duration(50)
           .style('opacity', 0.9);
 
-        // console.log('state: ', d.data.stats.state)
-        // console.log('props: ', d.data.stats.props)
-
-        tooltipDiv.html(`<p><strong>State</strong>: ${d.data.stats.state}<br>
+        tooltipDiv.html(`<h3>${d.data.name}</h3>
+                         <hr>
+                         <strong>State</strong>: ${d.data.stats.state}<br>
                          <br><strong>Props</strong>: ${d.data.stats.props}<br>
+                         <br><strong>Tag</strong>: ${d.data.tag}<br>
+                         <br><strong>EffectTag</strong>: ${d.data.stats.effectTag}<br>
                          <br><strong>Render Time</strong>: ${d.data.stats.renderTotal} seconds</p>
                          `, this)
-
-        // .style('left', d3.select(this).attr("cy") + 'px')
-        // .style('top', d3.select(this).attr("cx") + 'px')
-        // .style('left', (d3.event.pageX - 90) + 'px')
-        // .style('top', (d3.event.pageY - 65) + 'px')
+          .style('left', (d3.event.pageX) + 'px')
+          .style('top', (d3.event.pageY) + 'px');
       })
       // eslint-disable-next-line no-unused-vars
       .on('mouseout', function (d) {
@@ -162,7 +161,7 @@ export default class D3Tree extends Component {
     // define tooltip
     const tooltipDiv = d3.select('body').append('div')
       .attr('class', 'tooltip')
-      .style('opacity', 1);
+      .style('opacity', 0);
   }
 
 
