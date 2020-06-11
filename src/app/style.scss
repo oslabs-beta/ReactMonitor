@@ -18,3 +18,21 @@ body {
   margin: 0;
   background: whitesmoke;
 }
+
+.tooltip {
+  position: absolute;
+  max-width: 250px;
+  padding: 5px;
+  background: rgb(72, 83, 240);
+  border-radius: 5px;
+  pointer-events: none;
+  box-shadow: 3px 3px 3px rgba(6, 19, 92, 0.65);
+  h3 {
+    text-align: center;
+    color: rgb(18, 29, 126);
+  }
+  hr {
+    border: none;
+    border-top: 1px solid rgba(245, 245, 245, 0.541);
+  }
+}
