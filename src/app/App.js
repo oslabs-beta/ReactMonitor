@@ -16,7 +16,9 @@ export default class App extends Component {
   }
 
   componentDidMount() {
+    console.log('THIS IS MOUNTING ALL THE TIME')
     if (!port) port = chrome.runtime.connect();
+
     port.onMessage.addListener((message) => {
       console.log('didmountmessage: ', message);
       this.setState({
@@ -27,17 +29,17 @@ export default class App extends Component {
     });
   }
 
-  componentDidUpdate() {
-    if (!port) port = chrome.runtime.connect();
-    port.onMessage.addListener((message) => {
-      console.log('didupdatemessage: ', message);
-      this.setState({
-        name: message.payload.payload.name,
-        children: message.payload.payload.children,
-        stats: message.payload.payload.stats,
-      });
-    });
-  }
+  // componentDidUpdate() {
+  //   if (!port) port = chrome.runtime.connect();
+  //   port.onMessage.addListener((message) => {
+  //     console.log('didupdatemessage: ', message);
+  //     this.setState({
+  //       name: message.payload.payload.name,
+  //       children: message.payload.payload.children,
+  //       stats: message.payload.payload.stats,
+  //     });
+  //   });
+  // }
 
   render() {
     return (

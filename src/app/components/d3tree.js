@@ -33,7 +33,7 @@ export default class D3Tree extends Component {
   removed3Tree() {
     const { current } = this.treeRef;
     // console.log(this.treeRef)
-    // document.querySelectorAll('.tooltip').forEach(el => el.remove());
+    document.querySelectorAll('.tooltip').forEach(el => el.remove());
     while (current.hasChildNodes()) {
       current.removeChild(current.lastChild);
     }
@@ -163,7 +163,6 @@ export default class D3Tree extends Component {
       .attr('class', 'tooltip')
       .style('opacity', 0);
   }
-
 
   render() {
     return <div ref={this.treeRef}></div>;
