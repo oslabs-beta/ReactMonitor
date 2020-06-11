@@ -1,0 +1,23 @@
+@startuml treeCreatorUML
+                                 
+control TreeCreator           
+control TreeGraphFromHostCreator  
+entity Node  
+control helper
+entity recursivelyDeleteParent
+entity compareStateAndProps
+entity Window
+
+
+TreeCreator -> TreeGraphFromHostCreator : treeGraphFromHostCreator(hostRoot.child);
+TreeGraphFromHostCreator -> Node : treeGraph = new Node(name, null, [], fiber);
+TreeGraphFromHostCreator -> helper: helper(fiber, treeGraph)
+helper -> helper: recursively reads Fiber child, sibling \nand creates array of children, parent.children
+TreeCreator <- TreeGraphFromHostCreator: return treeGraph
+TreeCreator -> recursivelyDeleteParent: delete parents from treeGraph
+TreeCreator -> TreeCreator: tempTreeGraph = JSON.parse(JSON.stringify(treeGraph))
+TreeCreator -> compareStateAndProps: compareStateAndProps(treeGraph, prevTreeGraph, null)
+compareStateAndProps -> compareStateAndProps: 1.)initial load  \n2.)load when diff \n3.)load when no prevNode
+TreeCreator -> TreeCreator: prevTreeGraph = tempTreeGraph \nwasMounted = true;
+TreeCreator -> Window: postMessage({action: 'npmToContent', payload: treeGraph})
+@enduml
