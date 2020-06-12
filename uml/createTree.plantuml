@@ -1,5 +1,5 @@
 @startuml devtools
-entity npmPackage 
+boundary treeCreator 
 boundary Window
 control contentScript
 boundary Chrome
