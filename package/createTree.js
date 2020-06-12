@@ -219,19 +219,11 @@ function treeCreator(hostRoot) {
   window.postMessage({ action: 'npmToContent', payload: treeGraph });
 }
 
-// module.exports = function (container) {
-//   // console.log('container -', container);
-//   const fiberRoot = container._reactRootContainer._internalRoot;
-//   //const hostRoot = fiberRoot.current;
-//   return treeCreator(fiberRoot.current);
-// };
-
 module.exports = function (container) {
   const fiberRoot = container._reactRootContainer._internalRoot;
   const hostRoot = fiberRoot.current;
 
   window.addEventListener('load', () => treeCreator(hostRoot))
-  // setTimeout(() => treeCreator(hostRoot), 500); // needs to wait for the page load
   window.addEventListener('click', () => {
     // check if the hostRoot is new - only then invoke
     setTimeout(() => {

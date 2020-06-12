@@ -18,6 +18,7 @@ export default class App extends Component {
   componentDidMount() {
     if (!port) port = chrome.runtime.connect();
     port.onMessage.addListener((message) => {
+      console.log('message', message);
       this.setState({
         name: message.payload.payload.name,
         children: message.payload.payload.children,
