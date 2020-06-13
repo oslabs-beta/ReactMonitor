@@ -13,18 +13,17 @@ export default class D3Tree extends Component {
   }
 
   componentDidMount() {
-    const { name, children } = this.props;
-    const hierarchy = { name, children };
+    const { name, children, stats } = this.props;
+    const hierarchy = { name, children, stats };
     root = JSON.parse(JSON.stringify(hierarchy));
     this.maked3Tree(root);
   }
 
   componentDidUpdate() {
-    const { name, children } = this.props;
-    const hierarchy = { name, children };
+    const { name, children, stats } = this.props;
+    const hierarchy = { name, children, stats };
     root = JSON.parse(JSON.stringify(hierarchy));
     this.maked3Tree(root);
-    console.log('in component did mount')
   }
 
   componentWillUnmount() {
