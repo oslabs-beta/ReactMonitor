@@ -1,38 +1,50 @@
+$primary-color: #7A679B;
+$secondary-color: #685155;
+$tertiary-color: #8B85C1;
+$light-color: #D4CDF4;
+$other-color: #815E5B;
+
 .navbar { 
   padding: 15px;
-  background: rgb(92, 92, 92);
+  background: $primary-color;
   display: flex;
   justify-content: space-evenly;
+  -webkit-box-shadow: 0px 10px 2px 0px $secondary-color;
+  -moz-box-shadow: 0px 10px 2px 0px $secondary-color;
+  box-shadow: 0px 4px 2px 0px $secondary-color;
   li {
     list-style: none;
     font-size: large;
     a {
       text-decoration: none;
-      color: whitesmoke;
+      color: $light-color;
       font-weight: 900;
+      &:hover {
+        color: white;
+      }
     }
   }
 }
 
 body { 
   margin: 0;
-  background: whitesmoke;
+  background: $tertiary-color;
 }
 
 .tooltip {
   position: absolute;
   max-width: 250px;
   padding: 5px;
-  background: rgb(72, 83, 240);
+  background: $primary-color;
   border-radius: 5px;
   pointer-events: none;
-  box-shadow: 3px 3px 3px rgba(6, 19, 92, 0.65);
+  box-shadow: 3px 3px 3px $secondary-color;
   h3 {
     text-align: center;
-    color: rgb(18, 29, 126);
+    color: $light-color;
   }
   hr {
     border: none;
-    border-top: 1px solid rgba(245, 245, 245, 0.541);
+    border-top: 1px solid $light-color;
   }
 }
