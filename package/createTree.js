@@ -4,6 +4,7 @@ class Node {
   constructor(name, parent, children, fiber) {
     this.name = name;
     this.parent = parent;
+    this.value = fiber.actualDuration.toFixed(2);
     this.children = children;
     this.stats = {
       state: JSON.stringify(fiber.memoizedState),
@@ -241,7 +242,7 @@ module.exports = function (container) {
   const hostRoot = fiberRoot.current;
 
   window.addEventListener('load', () => treeCreator(hostRoot))
-  // setTimeout(() => treeCreator(hostRoot), 500); // needs to wait for the page load
+
   window.addEventListener('click', () => {
     // check if the hostRoot is new - only then invoke
     setTimeout(() => {
