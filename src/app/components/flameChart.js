@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
-import { flamegraph } from 'd3-flame-graph'
+import { flamegraph } from 'd3-flame-graph';
+import flameGraphData from '../../../mockData/tinyFlameGraph';
 
 let root = {
   "name": "Eve",
@@ -54,39 +55,72 @@ export default class FlameChart extends Component {
   }
 
   componentDidMount() {
+    const data = {
+      "name": "codesmith",
+      "value": 100,
+      "children": [
+        {
+          "name": "genunix`syscall_mstate",
+          "value": 70,
+        },
+        {
+          "name": "america",
+          "value": 40,
+          "children": [
+            {
+              "name": "unix`page_lookup_create",
+              "value": 30
+            }
+          ],
+        }],
+    }
+
+
+    // Example on how to use custom a tooltip.
+    //   var tip = flamegraph.tooltip.defaultFlamegraphTooltip()
+    //   .html(function(d) { return "name: " + d.data.name + ", value: " + d.data.value; });
+    // chart.tooltip(tip);
+
     // const { name, children } = this.props;
-    // const root = d3.hierarchy(JSON.stringify({ children }))
-    console.log('this is the mount Root: ', root)
-    this.createFlameGraph(d3.hierarchy(JSON.stringify(root)))
+    // const value = this.props.stats.renderTotal;
+    // console.log(this.props.stats.renderTotal)
+    // const root = d3.hierarchy(JSON.stringify({ name, value, children }))
+    // const root = d3.hierarchy(JSON.stringify(flameGraphData));
+    // console.log(root)
+    this.createFlameGraph(data)
   }
 
-  componentDidUpdate() {
-    // const { name, children } = this.props;
-    // const root = d3.hierarchy(JSON.stringify({ children }))
-    console.log('This is the update Root: ', root)
-    this.createFlameGraph(d3.hierarchy(JSON.stringify(root)))
-  }
+  // function invokeFind() {
+  //   var searchId = parseInt(location.hash.substring(1), 10);
+  //   if (searchId) {
+  //     find(searchId);
+  //   }
+  // }
 
   createFlameGraph(data) {
 
     console.log('data in create: ', data)
 
     chart = flamegraph()
-      .title('a beautiful Flamegraph')
-      // .onClick((d) => console.info("You clicked on frame " + d.data.name))
-      .height(1080)
-      .width(960)
+      // .height(1080)
+      .width(500)
       .cellHeight(18)
-    // .transitionDuration(0)
-    // .minFrameSize(0)
-    // .transitionEase(d3.easeCubic)
-    // .sort(true)
-    // .title("");
-    setTimeout(() => {
-      d3.select(this.flamegraphRef)
-        .datum(data)
-        .call(chart)
-    }, 200)
+      .transitionDuration(750)
+      .minFrameSize(5)
+      .transitionEase(d3.easeCubic)
+      .sort(true)
+      .title("")
+      // .onClick(onClick)
+      .differential(false)
+      .elided(false)
+      .selfValue(false)
+      .setColorMapper((d, originalColor) =>
+        d.highlight ? "#6aff8f" : originalColor);
+
+    d3.select(this.flamegraphRef.current)
+      .datum(data)
+      .call(chart);
+    // .call(invokeFind);
   }
 
   render() {

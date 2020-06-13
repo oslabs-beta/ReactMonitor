@@ -1,0 +1,16 @@
+@startuml windowUML
+
+boundary App               
+boundary Container           
+control Window                                   
+control TreeCreator           
+
+
+
+App -> Container : setState is called
+Container -> Container : fiberRoot = container._reactRootContainer._internalRoot 
+Window -> Window : every 200 ms, hostRoot !== fiberRoot.current
+Window -> TreeCreator : treeCreator(fiberRoot.current)
+TreeCreator -> Window: postMessage({action: 'npmToContent', payload: treeGraph})
+
+@enduml
