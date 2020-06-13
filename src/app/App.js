@@ -20,11 +20,7 @@ export default class App extends Component {
     if (!port) port = chrome.runtime.connect();
 
     port.onMessage.addListener((message) => {
-<<<<<<< HEAD
-      console.log('didmountmessage: ', message);
-=======
       console.log('message', message);
->>>>>>> 9a6a88d1d338a608a07b4aa854e7f8a54c830d96
       this.setState({
         name: message.payload.payload.name,
         children: message.payload.payload.children,
@@ -32,21 +28,6 @@ export default class App extends Component {
       });
     });
   }
-<<<<<<< HEAD
-
-  // componentDidUpdate() {
-  //   if (!port) port = chrome.runtime.connect();
-  //   port.onMessage.addListener((message) => {
-  //     console.log('didupdatemessage: ', message);
-  //     this.setState({
-  //       name: message.payload.payload.name,
-  //       children: message.payload.payload.children,
-  //       stats: message.payload.payload.stats,
-  //     });
-  //   });
-  // }
-=======
->>>>>>> 9a6a88d1d338a608a07b4aa854e7f8a54c830d96
 
   render() {
     return (
