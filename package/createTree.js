@@ -4,6 +4,7 @@ class Node {
   constructor(name, parent, children, fiber) {
     this.name = name;
     this.parent = parent;
+    this.value = Number(fiber.actualDuration.toFixed(2));
     this.children = children;
     this.stats = {
       state: JSON.stringify(fiber.memoizedState),
@@ -80,12 +81,12 @@ function treeCreator(hostRoot) {
         // (do the type check for elements that are functions or html elements)
         let newGraphNode = treeGraph;
         if (
-          typeof fiber.child.type !== 'object' 
+          typeof fiber.child.type !== 'object'
           && (fiber.child.child ? typeof fiber.child.child.type !== 'object' : true)
         ) {
           newGraphNode = new Node(
-            fiber.child.key 
-            || (fiber.child.type ? fiber.child.type.name : fiber.child.type) 
+            fiber.child.key
+            || (fiber.child.type ? fiber.child.type.name : fiber.child.type)
             || fiber.child.type,
             treeGraph, [], fiber.child
           );
@@ -98,13 +99,13 @@ function treeCreator(hostRoot) {
       if (fiber.sibling) {
         let newGraphNode = treeGraph;
         if (
-          typeof fiber.sibling.type !== 'object' 
+          typeof fiber.sibling.type !== 'object'
           && (fiber.sibling.child ? typeof fiber.sibling.child.type !== 'object' : true)
         ) {
           // create new GraphNode based on it with parent being a treeGraph.parent
           newGraphNode = new Node(
-            fiber.sibling.key 
-            || (fiber.sibling.type ? fiber.sibling.type.name : fiber.sibling.type) 
+            fiber.sibling.key
+            || (fiber.sibling.type ? fiber.sibling.type.name : fiber.sibling.type)
             || fiber.sibling.type,
             treeGraph.parent, [], fiber.sibling
           );

@@ -12,14 +12,17 @@ export default class App extends Component {
       name: '',
       children: [],
       stats: '',
+      value: 0
     };
   }
 
   componentDidMount() {
     if (!port) port = chrome.runtime.connect();
+
     port.onMessage.addListener((message) => {
       console.log('message', message);
       this.setState({
+        value: message.payload.payload.value,
         name: message.payload.payload.name,
         children: message.payload.payload.children,
         stats: message.payload.payload.stats,
@@ -30,7 +33,12 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <MainContainer stats={this.state.stats} name={this.state.name} children={this.state.children} />
+        <MainContainer
+          value={this.state.value}
+          name={this.state.name}
+          children={this.state.children}
+          stats={this.state.stats}
+        />
       </div>
     );
   }
