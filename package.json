@@ -10,8 +10,7 @@
     ]
   },
   "scripts": {
-    "clean": "rm -rf dist && cpy src/extension/manifest.json dist",
-    "build": "NODE_ENV=production webpack",
+    "build": "rm -rf dist && cpy src/extension/manifest.json dist && NODE_ENV=production webpack",
     "start": "webpack-dev-server --open",
     "test": "jest"
   },
