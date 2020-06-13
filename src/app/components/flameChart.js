@@ -14,7 +14,7 @@ export default class FlameChart extends Component {
   componentDidMount() {
     const { name, children } = this.props;
     const value = this.props.stats.renderTotal;
-    console.log(value)
+    console.log(this.props.stats.renderTotal)
     const root = d3.hierarchy(JSON.stringify({ name, value, children }))
     console.log(root)
     this.createFlameGraph(root)
@@ -40,4 +40,59 @@ export default class FlameChart extends Component {
   render() {
     return <div ref={this.flamegraphRef}></div>
   }
-}
+
+
+
+// import React, {Component} from 'react';
+// import { FlameGraph } from 'react-flame-graph';
+// import { hierarchy } from 'd3';
+
+
+// class FlameChart extends Component {
+//   constructor(props) {
+//   super(props);
+
+//   // this.flamegraphRef = React.createRef();
+//   // this.createFlameGraph = this.createFlameGraph.bind(this);
+//   }
+
+//   componentDidMount(){
+//     const { name, children } = this.props;
+//     const value = this.props.stats.renderTotal;
+//     const hierarchy = { name, value, children };
+//     // this.createFlameGraph(stats)
+//   }
+
+//   // componentDidUpdate(){
+//   //   const { stats } = this.props;
+//   //   this.createFlameGraph(stats)
+//   // }
+
+//   // createFlameGraph(data) {
+//   //   flamegraph(data)
+//   //     .width(960)
+
+//   //   d3.json("data.json", function(error, data) {
+//   //     if (error) return console.warn(error);
+//   //     d3.select("#flamegraph")
+//   //       .datum(data)
+//   //       .call(chart);
+//   //   })
+//   //   flamegraph.onClick((d)=>{
+//   //     console.log(d.data.name)
+//   //   })
+//   //   flamegraph.setDetailsElement(document.getElementById("details"));
+//   // }// <div ref={this.flamegraphRef} className="flamegraph"></div>
+
+//   render() {
+//     return (
+//       <FlameGraph
+//         data={hierarchy}
+//         height={200}
+//         width={400} 
+//       />
+//     );
+//   }
+// }
+
+// export default FlameChart;

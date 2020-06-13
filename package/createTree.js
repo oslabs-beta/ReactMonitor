@@ -81,18 +81,14 @@ function treeCreator(hostRoot) {
         // (do the type check for elements that are functions or html elements)
         let newGraphNode = treeGraph;
         if (
-          typeof fiber.child.type !== 'object' &&
-          (fiber.child.child
-            ? typeof fiber.child.child.type !== 'object'
-            : true)
+          typeof fiber.child.type !== 'object' 
+          && (fiber.child.child ? typeof fiber.child.child.type !== 'object' : true)
         ) {
           newGraphNode = new Node(
-            fiber.child.key ||
-            (fiber.child.type ? fiber.child.type.name : fiber.child.type) ||
-            fiber.child.type,
-            treeGraph,
-            [],
-            fiber.child
+            fiber.child.key 
+            || (fiber.child.type ? fiber.child.type.name : fiber.child.type) 
+            || fiber.child.type,
+            treeGraph, [], fiber.child
           );
           treeGraph.children.push(newGraphNode);
         }
@@ -103,21 +99,15 @@ function treeCreator(hostRoot) {
       if (fiber.sibling) {
         let newGraphNode = treeGraph;
         if (
-          typeof fiber.sibling.type !== 'object' &&
-          (fiber.sibling.child
-            ? typeof fiber.sibling.child.type !== 'object'
-            : true)
+          typeof fiber.sibling.type !== 'object' 
+          && (fiber.sibling.child ? typeof fiber.sibling.child.type !== 'object' : true)
         ) {
           // create new GraphNode based on it with parent being a treeGraph.parent
           newGraphNode = new Node(
-            fiber.sibling.key ||
-            (fiber.sibling.type
-              ? fiber.sibling.type.name
-              : fiber.sibling.type) ||
-            fiber.sibling.type,
-            treeGraph.parent,
-            [],
-            fiber.sibling
+            fiber.sibling.key 
+            || (fiber.sibling.type ? fiber.sibling.type.name : fiber.sibling.type) 
+            || fiber.sibling.type,
+            treeGraph.parent, [], fiber.sibling
           );
           // push the node on to the treeGraph.parent.children array
           treeGraph.parent.children.push(newGraphNode);
@@ -230,19 +220,15 @@ function treeCreator(hostRoot) {
   window.postMessage({ action: 'npmToContent', payload: treeGraph });
 }
 
-// module.exports = function (container) {
-//   // console.log('container -', container);
-//   const fiberRoot = container._reactRootContainer._internalRoot;
-//   //const hostRoot = fiberRoot.current;
-//   return treeCreator(fiberRoot.current);
-// };
-
 module.exports = function (container) {
   const fiberRoot = container._reactRootContainer._internalRoot;
   const hostRoot = fiberRoot.current;
 
   window.addEventListener('load', () => treeCreator(hostRoot))
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9a6a88d1d338a608a07b4aa854e7f8a54c830d96
   window.addEventListener('click', () => {
     // check if the hostRoot is new - only then invoke
     setTimeout(() => {
