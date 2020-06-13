@@ -87,7 +87,7 @@ export default class FlameChart extends Component {
     // const root = d3.hierarchy(JSON.stringify({ name, value, children }))
     // const root = d3.hierarchy(JSON.stringify(flameGraphData));
     // console.log(root)
-    this.createFlameGraph(data)
+    this.createFlameGraph(this.props.children)
   }
 
   // function invokeFind() {

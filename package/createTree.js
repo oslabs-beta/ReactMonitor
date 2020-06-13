@@ -4,7 +4,7 @@ class Node {
   constructor(name, parent, children, fiber) {
     this.name = name;
     this.parent = parent;
-    this.value = fiber.actualDuration.toFixed(2);
+    this.value = Number(fiber.actualDuration.toFixed(2));
     this.children = children;
     this.stats = {
       state: JSON.stringify(fiber.memoizedState),
