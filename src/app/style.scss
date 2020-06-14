@@ -4,6 +4,11 @@ $tertiary-color: #8B85C1;
 $light-color: #D4CDF4;
 $other-color: #815E5B;
 
+body { 
+  margin: 0;
+  background: $tertiary-color;
+}
+
 .navbar { 
   padding: 15px;
   background: $primary-color;
@@ -26,11 +31,6 @@ $other-color: #815E5B;
   }
 }
 
-body { 
-  margin: 0;
-  background: $tertiary-color;
-}
-
 .tooltip {
   position: absolute;
   max-width: 250px;
@@ -47,4 +47,17 @@ body {
     border: none;
     border-top: 1px solid $light-color;
   }
+}
+
+.flameDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#flame-title {
+  padding-top: 20px;
+  text-align: center;
+  color: $secondary-color;
+  font-size: x-large;
 }
