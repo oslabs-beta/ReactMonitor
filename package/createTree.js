@@ -211,15 +211,15 @@ function treeCreator(hostRoot, treeGraph = null) {
 
 }
 
-function sendContentScript(currentTree, workInProgressTree){
+function sendContentScript(prevTree, currentTree){
 
   // do this on first load
-  if (workInProgressTree === undefined){
-    const treeGraph = treeCreator(currentTree);
+  if (currentTree === undefined){
+    const treeGraph = treeCreator(prevTree);
     window.postMessage({ action: 'npmToContent', payload: treeGraph });
   // if any changes between current DOM and Virtual DOM 
-  }else if (currentTree !== workInProgressTree) {
-    const treeGraph = treeCreator(workInProgressTree);
+  }else if (prevTree !== currentTree) {
+    const treeGraph = treeCreator(currentTree);
     window.postMessage({ action: 'npmToContent', payload: treeGraph });
   }
 
