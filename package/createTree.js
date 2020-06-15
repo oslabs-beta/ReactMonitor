@@ -28,20 +28,6 @@ class Node {
     this.tag = fiber.tag;
   }
 
-  // initializeProps(fiber) {
-  //   let props = '';
-  //   if (fiber.memoizedProps.children) {
-  //     if (typeof fiber.memoizedProps.children[0] === 'object') {
-  //       fiber.memoizedProps.children.forEach((object) => {
-  //         props += JSON.stringify(object.props);
-  //       });
-  //     } else props = JSON.stringify(fiber.memoizedProps.children);
-  //   } else {
-  //     props = JSON.stringify(fiber.memoizedProps);
-  //   }
-
-  //   return props;
-  // }
 }
 
 function JSONStringify(object) {
@@ -148,7 +134,7 @@ const compareStateAndProps = (node, prevNode, parentShapeProps) => {
 };
 
   // helper function - that accepts the node - Host Root
-  function treeFactory(fiber) {
+  function treeGraphFactory(fiber) {
     // create a treeGraph
     const treeGraph = new Node(fiber.type.name, null, [], fiber); // Represent the top most Element (like App);
     const helper = (fiber, treeGraph) => {
@@ -201,50 +187,60 @@ const compareStateAndProps = (node, prevNode, parentShapeProps) => {
   }
 
 let prevTreeGraph = null;
-function treeCreator(hostRoot) {
+function treeCreator(hostRoot, treeGraph = null) {
 
-  let treeGraph;
-  // check if the hostRoot has a child
+  // create treeGraph
   if (hostRoot.child) {
-    // yes? invoke the search function on the child - App Fiber
-    // assign the returned result to tree
-    treeGraph = treeFactory(hostRoot.child);
+    // traverse App Fiber and create treeGraph
+    treeGraph = treeGraphFactory(hostRoot.child);
   }
 
-
+  // prune treeGraph
   deleteParent(treeGraph);
   delete treeGraph.parent;
 
+  // enhance treeGraph 
+  // by comparing state and props in prevTreeGraph and treeGraph(current)
   const tempTreeGraph = JSON.parse(JSON.stringify(treeGraph));
-  // recursively compare state and props in prevTreeGraph and treeGraph
-
-
   compareStateAndProps(treeGraph, prevTreeGraph, null);
   prevTreeGraph = tempTreeGraph;
   wasMounted = true;
-  // Sends message to contentscript
-  window.postMessage({ action: 'npmToContent', payload: treeGraph });
+
+
+  return treeGraph;
+
+}
+
+function sendContentScript(hostRoot, newHostRoot){
+
+  // do this on first load
+  if (newHostRoot === undefined){
+    const treeGraph = treeCreator(hostRoot);
+    window.postMessage({ action: 'npmToContent', payload: treeGraph });
+  // if any changes between current DOM and Virtual DOM 
+  }else if (hostRoot !== newHostRoot) {
+    const treeGraph = treeCreator(newHostRoot);
+    window.postMessage({ action: 'npmToContent', payload: treeGraph });
+  }
+
 }
 
 module.exports = function (container) {
   const fiberRoot = container._reactRootContainer._internalRoot;
   const hostRoot = fiberRoot.current;
 
-  window.addEventListener('load', () => treeCreator(hostRoot))
+  // on first load use initial render.
+  window.addEventListener('load', () => sendContentScript(hostRoot))
+
   window.addEventListener('click', () => {
-    // check if the hostRoot is new - only then invoke
     setTimeout(() => {
-      if (hostRoot !== fiberRoot.current) {
-        treeCreator(fiberRoot.current);
-      }
+      sendContentScript(hostRoot, fiberRoot.current);
     }, 200);
   });
+
   window.addEventListener('keyup', () => {
     setTimeout(() => {
-      // check if the hostRoot is new - only then invoke
-      if (hostRoot !== fiberRoot.current) {
-        treeCreator(fiberRoot.current);
-      }
+      sendContentScript(hostRoot, fiberRoot.current);
     }, 200);
   });
 };
