@@ -28,20 +28,20 @@ class Node {
     this.tag = fiber.tag;
   }
 
-  initializeProps(fiber) {
-    let props = '';
-    if (fiber.memoizedProps.children) {
-      if (typeof fiber.memoizedProps.children[0] === 'object') {
-        fiber.memoizedProps.children.forEach((object) => {
-          props += JSON.stringify(object.props);
-        });
-      } else props = JSON.stringify(fiber.memoizedProps.children);
-    } else {
-      props = JSON.stringify(fiber.memoizedProps);
-    }
+  // initializeProps(fiber) {
+  //   let props = '';
+  //   if (fiber.memoizedProps.children) {
+  //     if (typeof fiber.memoizedProps.children[0] === 'object') {
+  //       fiber.memoizedProps.children.forEach((object) => {
+  //         props += JSON.stringify(object.props);
+  //       });
+  //     } else props = JSON.stringify(fiber.memoizedProps.children);
+  //   } else {
+  //     props = JSON.stringify(fiber.memoizedProps);
+  //   }
 
-    return props;
-  }
+  //   return props;
+  // }
 }
 
 function JSONStringify(object) {
@@ -66,11 +66,89 @@ function JSONStringify(object) {
   return string;
 }
 
-let prevTreeGraph = null;
 
-function treeCreator(hostRoot) {
+function deleteParent(root) {
+  if (root.parent) {
+    delete root.parent;
+  }
+  if (root.children) {
+    root.children.forEach((child) => deleteParent(child));
+  }
+}
+
+const compareStateAndProps = (node, prevNode, parentShapeProps) => {
+  // compare state and props properties on stats properties for both nodes
+  // if same - treeGraph.stats.stateOrPropsChanged - false
+  if (node && prevNode) {
+    // check if the node's type is a string
+    // yes? give it a color of the parent - because Composite Component renders(or not) Host Component
+    if (node.stats.type === 'string') {
+      node.nodeSvgShape.shapeProps = parentShapeProps;
+      delete node.stats.state;
+      delete node.stats.props;
+    } else if (
+      prevNode.stats.state === node.stats.state &&
+      prevNode.stats.props === node.stats.props
+    ) {
+      if (
+        (node.stats.effectTag === 0 || node.stats.effectTag === 4) &&
+        wasMounted
+      ) {
+        node.nodeSvgShape.shapeProps.fill = 'gray';
+      } else {
+        node.nodeSvgShape.shapeProps.fill = 'red';
+        node.nodeSvgShape.shapeProps.rx = 12;
+        node.nodeSvgShape.shapeProps.ry = 12;
+      }
+    }
+
+    // delete node.stats;
+
+    // recursively invoke the function for each children
+    if (node.children.length) {
+      for (let i = 0; i < node.children.length; i += 1) {
+        compareStateAndProps(
+          node.children[i],
+          prevNode.children[i],
+          node.nodeSvgShape.shapeProps
+        );
+      }
+    }
+  } else if (node) {
+    // delete node.stats;
+    if (node.stats.type === 'string') {
+      delete node.stats.state;
+      delete node.stats.props;
+    }
+
+    // recursively invoke the function for each children
+    if (node.children.length) {
+      for (let i = 0; i < node.children.length; i += 1) {
+        compareStateAndProps(
+          node.children[i],
+          null,
+          node.nodeSvgShape.shapeProps
+        );
+      }
+    }
+  }
+
+  if (!wasMounted) {
+    // delete node.stats;
+    if (node.stats.type === 'string') {
+      delete node.stats.state;
+      delete node.stats.props;
+    }
+    if (node.children.length) {
+      for (let i = 0; i < node.children.length; i += 1) {
+        compareStateAndProps(node.children[i]);
+      }
+    }
+  }
+};
+
   // helper function - that accepts the node - Host Root
-  function treeGraphFromHostRootCreator(fiber) {
+  function treeFactory(fiber) {
     // create a treeGraph
     const treeGraph = new Node(fiber.type.name, null, [], fiber); // Represent the top most Element (like App);
     const helper = (fiber, treeGraph) => {
@@ -121,97 +199,25 @@ function treeCreator(hostRoot) {
     console.log("treeGraph =", treeGraph);
     return treeGraph;
   }
+
+let prevTreeGraph = null;
+function treeCreator(hostRoot) {
+
   let treeGraph;
   // check if the hostRoot has a child
   if (hostRoot.child) {
     // yes? invoke the search function on the child - App Fiber
     // assign the returned result to tree
-    treeGraph = treeGraphFromHostRootCreator(hostRoot.child);
+    treeGraph = treeFactory(hostRoot.child);
   }
 
-  function recursivelyDeleteParent(root) {
-    if (root.parent) {
-      delete root.parent;
-    }
-    if (root.children) {
-      root.children.forEach((child) => recursivelyDeleteParent(child));
-    }
-  }
-  recursivelyDeleteParent(treeGraph);
+
+  deleteParent(treeGraph);
   delete treeGraph.parent;
 
   const tempTreeGraph = JSON.parse(JSON.stringify(treeGraph));
   // recursively compare state and props in prevTreeGraph and treeGraph
-  const compareStateAndProps = (node, prevNode, parentShapeProps) => {
-    // compare state and props properties on stats properties for both nodes
-    // if same - treeGraph.stats.stateOrPropsChanged - false
-    if (node && prevNode) {
-      // check if the node's type is a string
-      // yes? give it a color of the parent - because Composite Component renders(or not) Host Component
-      if (node.stats.type === 'string') {
-        node.nodeSvgShape.shapeProps = parentShapeProps;
-        delete node.stats.state;
-        delete node.stats.props;
-      } else if (
-        prevNode.stats.state === node.stats.state &&
-        prevNode.stats.props === node.stats.props
-      ) {
-        if (
-          (node.stats.effectTag === 0 || node.stats.effectTag === 4) &&
-          wasMounted
-        ) {
-          node.nodeSvgShape.shapeProps.fill = 'gray';
-        } else {
-          node.nodeSvgShape.shapeProps.fill = 'red';
-          node.nodeSvgShape.shapeProps.rx = 12;
-          node.nodeSvgShape.shapeProps.ry = 12;
-        }
-      }
 
-      // delete node.stats;
-
-      // recursively invoke the function for each children
-      if (node.children.length) {
-        for (let i = 0; i < node.children.length; i += 1) {
-          compareStateAndProps(
-            node.children[i],
-            prevNode.children[i],
-            node.nodeSvgShape.shapeProps
-          );
-        }
-      }
-    } else if (node) {
-      // delete node.stats;
-      if (node.stats.type === 'string') {
-        delete node.stats.state;
-        delete node.stats.props;
-      }
-
-      // recursively invoke the function for each children
-      if (node.children.length) {
-        for (let i = 0; i < node.children.length; i += 1) {
-          compareStateAndProps(
-            node.children[i],
-            null,
-            node.nodeSvgShape.shapeProps
-          );
-        }
-      }
-    }
-
-    if (!wasMounted) {
-      // delete node.stats;
-      if (node.stats.type === 'string') {
-        delete node.stats.state;
-        delete node.stats.props;
-      }
-      if (node.children.length) {
-        for (let i = 0; i < node.children.length; i += 1) {
-          compareStateAndProps(node.children[i]);
-        }
-      }
-    }
-  };
 
   compareStateAndProps(treeGraph, prevTreeGraph, null);
   prevTreeGraph = tempTreeGraph;
