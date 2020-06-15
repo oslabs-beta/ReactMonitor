@@ -189,17 +189,17 @@ const compareStateAndProps = (node, prevNode, parentShapeProps) => {
 let prevTreeGraph = null;
 function treeCreator(hostRoot, treeGraph = null) {
 
-  // create treeGraph
+  // 1.) create treeGraph
   if (hostRoot.child) {
-    // traverse App Fiber and create treeGraph
+    // recursively traverse App Fiber Tree and create treeGraph
     treeGraph = treeGraphFactory(hostRoot.child);
   }
 
-  // prune treeGraph
+  // 2.) prune treeGraph
   deleteParent(treeGraph);
   delete treeGraph.parent;
 
-  // enhance treeGraph 
+  // 3.) enhance treeGraph 
   // by comparing state and props in prevTreeGraph and treeGraph(current)
   const tempTreeGraph = JSON.parse(JSON.stringify(treeGraph));
   compareStateAndProps(treeGraph, prevTreeGraph, null);
@@ -211,15 +211,15 @@ function treeCreator(hostRoot, treeGraph = null) {
 
 }
 
-function sendContentScript(hostRoot, newHostRoot){
+function sendContentScript(currentTree, workInProgressTree){
 
   // do this on first load
-  if (newHostRoot === undefined){
-    const treeGraph = treeCreator(hostRoot);
+  if (workInProgressTree === undefined){
+    const treeGraph = treeCreator(currentTree);
     window.postMessage({ action: 'npmToContent', payload: treeGraph });
   // if any changes between current DOM and Virtual DOM 
-  }else if (hostRoot !== newHostRoot) {
-    const treeGraph = treeCreator(newHostRoot);
+  }else if (currentTree !== workInProgressTree) {
+    const treeGraph = treeCreator(workInProgressTree);
     window.postMessage({ action: 'npmToContent', payload: treeGraph });
   }
 
