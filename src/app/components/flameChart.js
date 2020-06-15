@@ -12,11 +12,13 @@ export default class FlameChart extends Component {
 
   componentDidMount() {
     const { name, children, value } = this.props;
+    // document.querySelectorAll('.d3-flame-graph-tip').forEach(el => el.remove());
     this.createFlameGraph({ name, children, value })
   }
 
   componentDidUpdate() {
     const { name, children, value } = this.props;
+    // document.querySelectorAll('.d3-flame-graph-tip').forEach(el => el.remove());
     this.createFlameGraph({ name, children, value })
   }
 

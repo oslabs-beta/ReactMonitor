@@ -14,8 +14,8 @@ body {
   background: $primary-color;
   display: flex;
   justify-content: space-evenly;
-  -webkit-box-shadow: 0px 10px 2px 0px $secondary-color;
-  -moz-box-shadow: 0px 10px 2px 0px $secondary-color;
+  -webkit-box-shadow: 0px 4px 2px 0px $secondary-color;
+  -moz-box-shadow: 0px 4px 2px 0px $secondary-color;
   box-shadow: 0px 4px 2px 0px $secondary-color;
   li {
     list-style: none;
@@ -56,9 +56,21 @@ body {
   margin: auto;
 }
 
+.d3-flame-graph-tip {
+  padding: 8px;
+  border-radius: 5px;
+  -webkit-box-shadow: 4px 4px 2px 0px $secondary-color;
+  -moz-box-shadow: 4px 4px 2px 0px $secondary-color;
+  box-shadow: 4px 4px 2px 0px $secondary-color;
+  background-color: $primary-color;
+  font-size: large;
+  color: whitesmoke;
+}
+
+
 #flame-title {
   padding-top: 20px;
-  text-align: center;
-  color: $secondary-color;
-  font-size: x-large;
-}
+    text-align: center;
+    color: $secondary-color;
+    font-size: x-large;
+  }
