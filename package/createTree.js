@@ -28,20 +28,6 @@ class Node {
     this.tag = fiber.tag;
   }
 
-  initializeProps(fiber) {
-    let props = '';
-    if (fiber.memoizedProps.children) {
-      if (typeof fiber.memoizedProps.children[0] === 'object') {
-        fiber.memoizedProps.children.forEach((object) => {
-          props += JSON.stringify(object.props);
-        });
-      } else props = JSON.stringify(fiber.memoizedProps.children);
-    } else {
-      props = JSON.stringify(fiber.memoizedProps);
-    }
-
-    return props;
-  }
 }
 
 function JSONStringify(object) {
@@ -66,11 +52,89 @@ function JSONStringify(object) {
   return string;
 }
 
-let prevTreeGraph = null;
 
-function treeCreator(hostRoot) {
+function deleteParent(root) {
+  if (root.parent) {
+    delete root.parent;
+  }
+  if (root.children) {
+    root.children.forEach((child) => deleteParent(child));
+  }
+}
+
+const compareStateAndProps = (node, prevNode, parentShapeProps) => {
+  // compare state and props properties on stats properties for both nodes
+  // if same - treeGraph.stats.stateOrPropsChanged - false
+  if (node && prevNode) {
+    // check if the node's type is a string
+    // yes? give it a color of the parent - because Composite Component renders(or not) Host Component
+    if (node.stats.type === 'string') {
+      node.nodeSvgShape.shapeProps = parentShapeProps;
+      delete node.stats.state;
+      delete node.stats.props;
+    } else if (
+      prevNode.stats.state === node.stats.state &&
+      prevNode.stats.props === node.stats.props
+    ) {
+      if (
+        (node.stats.effectTag === 0 || node.stats.effectTag === 4) &&
+        wasMounted
+      ) {
+        node.nodeSvgShape.shapeProps.fill = 'gray';
+      } else {
+        node.nodeSvgShape.shapeProps.fill = 'red';
+        node.nodeSvgShape.shapeProps.rx = 12;
+        node.nodeSvgShape.shapeProps.ry = 12;
+      }
+    }
+
+    // delete node.stats;
+
+    // recursively invoke the function for each children
+    if (node.children.length) {
+      for (let i = 0; i < node.children.length; i += 1) {
+        compareStateAndProps(
+          node.children[i],
+          prevNode.children[i],
+          node.nodeSvgShape.shapeProps
+        );
+      }
+    }
+  } else if (node) {
+    // delete node.stats;
+    if (node.stats.type === 'string') {
+      delete node.stats.state;
+      delete node.stats.props;
+    }
+
+    // recursively invoke the function for each children
+    if (node.children.length) {
+      for (let i = 0; i < node.children.length; i += 1) {
+        compareStateAndProps(
+          node.children[i],
+          null,
+          node.nodeSvgShape.shapeProps
+        );
+      }
+    }
+  }
+
+  if (!wasMounted) {
+    // delete node.stats;
+    if (node.stats.type === 'string') {
+      delete node.stats.state;
+      delete node.stats.props;
+    }
+    if (node.children.length) {
+      for (let i = 0; i < node.children.length; i += 1) {
+        compareStateAndProps(node.children[i]);
+      }
+    }
+  }
+};
+
   // helper function - that accepts the node - Host Root
-  function treeGraphFromHostRootCreator(fiber) {
+  function treeGraphFactory(fiber) {
     // create a treeGraph
     const treeGraph = new Node(fiber.type.name, null, [], fiber); // Represent the top most Element (like App);
     const helper = (fiber, treeGraph) => {
@@ -121,124 +185,62 @@ function treeCreator(hostRoot) {
     console.log("treeGraph =", treeGraph);
     return treeGraph;
   }
-  let treeGraph;
-  // check if the hostRoot has a child
+
+let prevTreeGraph = null;
+function treeCreator(hostRoot, treeGraph = null) {
+
+  // 1.) create treeGraph
   if (hostRoot.child) {
-    // yes? invoke the search function on the child - App Fiber
-    // assign the returned result to tree
-    treeGraph = treeGraphFromHostRootCreator(hostRoot.child);
+    // recursively traverse App Fiber Tree and create treeGraph
+    treeGraph = treeGraphFactory(hostRoot.child);
   }
 
-  function recursivelyDeleteParent(root) {
-    if (root.parent) {
-      delete root.parent;
-    }
-    if (root.children) {
-      root.children.forEach((child) => recursivelyDeleteParent(child));
-    }
-  }
-  recursivelyDeleteParent(treeGraph);
+  // 2.) prune treeGraph
+  deleteParent(treeGraph);
   delete treeGraph.parent;
 
+  // 3.) enhance treeGraph 
+  // by comparing state and props in prevTreeGraph and treeGraph(current)
   const tempTreeGraph = JSON.parse(JSON.stringify(treeGraph));
-  // recursively compare state and props in prevTreeGraph and treeGraph
-  const compareStateAndProps = (node, prevNode, parentShapeProps) => {
-    // compare state and props properties on stats properties for both nodes
-    // if same - treeGraph.stats.stateOrPropsChanged - false
-    if (node && prevNode) {
-      // check if the node's type is a string
-      // yes? give it a color of the parent - because Composite Component renders(or not) Host Component
-      if (node.stats.type === 'string') {
-        node.nodeSvgShape.shapeProps = parentShapeProps;
-        delete node.stats.state;
-        delete node.stats.props;
-      } else if (
-        prevNode.stats.state === node.stats.state &&
-        prevNode.stats.props === node.stats.props
-      ) {
-        if (
-          (node.stats.effectTag === 0 || node.stats.effectTag === 4) &&
-          wasMounted
-        ) {
-          node.nodeSvgShape.shapeProps.fill = 'gray';
-        } else {
-          node.nodeSvgShape.shapeProps.fill = 'red';
-          node.nodeSvgShape.shapeProps.rx = 12;
-          node.nodeSvgShape.shapeProps.ry = 12;
-        }
-      }
-
-      // delete node.stats;
-
-      // recursively invoke the function for each children
-      if (node.children.length) {
-        for (let i = 0; i < node.children.length; i += 1) {
-          compareStateAndProps(
-            node.children[i],
-            prevNode.children[i],
-            node.nodeSvgShape.shapeProps
-          );
-        }
-      }
-    } else if (node) {
-      // delete node.stats;
-      if (node.stats.type === 'string') {
-        delete node.stats.state;
-        delete node.stats.props;
-      }
-
-      // recursively invoke the function for each children
-      if (node.children.length) {
-        for (let i = 0; i < node.children.length; i += 1) {
-          compareStateAndProps(
-            node.children[i],
-            null,
-            node.nodeSvgShape.shapeProps
-          );
-        }
-      }
-    }
-
-    if (!wasMounted) {
-      // delete node.stats;
-      if (node.stats.type === 'string') {
-        delete node.stats.state;
-        delete node.stats.props;
-      }
-      if (node.children.length) {
-        for (let i = 0; i < node.children.length; i += 1) {
-          compareStateAndProps(node.children[i]);
-        }
-      }
-    }
-  };
-
   compareStateAndProps(treeGraph, prevTreeGraph, null);
   prevTreeGraph = tempTreeGraph;
   wasMounted = true;
-  // Sends message to contentscript
-  window.postMessage({ action: 'npmToContent', payload: treeGraph });
+
+
+  return treeGraph;
+
+}
+
+function sendContentScript(prevTree, currentTree){
+
+  // do this on first load
+  if (currentTree === undefined){
+    const treeGraph = treeCreator(prevTree);
+    window.postMessage({ action: 'npmToContent', payload: treeGraph });
+  // if any changes between current DOM and Virtual DOM 
+  }else if (prevTree !== currentTree) {
+    const treeGraph = treeCreator(currentTree);
+    window.postMessage({ action: 'npmToContent', payload: treeGraph });
+  }
+
 }
 
 module.exports = function (container) {
   const fiberRoot = container._reactRootContainer._internalRoot;
   const hostRoot = fiberRoot.current;
 
-  window.addEventListener('load', () => treeCreator(hostRoot))
+  // on first load use initial render.
+  window.addEventListener('load', () => sendContentScript(hostRoot))
+
   window.addEventListener('click', () => {
-    // check if the hostRoot is new - only then invoke
     setTimeout(() => {
-      if (hostRoot !== fiberRoot.current) {
-        treeCreator(fiberRoot.current);
-      }
+      sendContentScript(hostRoot, fiberRoot.current);
     }, 200);
   });
+
   window.addEventListener('keyup', () => {
     setTimeout(() => {
-      // check if the hostRoot is new - only then invoke
-      if (hostRoot !== fiberRoot.current) {
-        treeCreator(fiberRoot.current);
-      }
+      sendContentScript(hostRoot, fiberRoot.current);
     }, 200);
   });
 };
