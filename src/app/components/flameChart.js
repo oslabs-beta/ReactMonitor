@@ -18,8 +18,6 @@ export default class FlameChart extends Component {
   componentDidUpdate() {
     const { name, children, value } = this.props;
     this.createFlameGraph({ name, children, value })
-    console.log('flamegraphref: ', this.flamegraphRef)
-    console.log('flamegraphrefcurrent: ', this.flamegraphRef.current)
   }
 
   // Example on how to use custom a tooltip.
