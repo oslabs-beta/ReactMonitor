@@ -11,11 +11,11 @@ To be able to use the application, users can:
 - Download the 'ReactMonitor' Google Chrome extension from [The Chrome Web Store](https://chrome.google.com/webstore/detail/reactmonitor)
 - Run the NPM package in your own codebase by following these steps:
   - Install the [package](https://www.npmjs.com/package/reactfibermonitor)\
-  `npm install reactmonitor`
+  `npm install reactfibermonitor`
   - Require/Import the package\
-  `import reactMonitor from 'reactmonitor'`\
+  `import reactMonitor from 'reactfibermonitor'`\
   or\
-  `const reactMonitor = require('reactmonitor')`
+  `const reactMonitor = require('reactfibermonitor')`
   - Invoke React Monitor with an input of the DOM element that you are rendering the React Element into
     ```
     const container = document.querySelector('#root');
