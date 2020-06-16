@@ -1,8 +1,15 @@
+// $primary-color: #000000;
+// $secondary-color: #14213d;
+// $tertiary-color: #e5e5e5;
+// $light-color: #ffffff;
+// $other-color: #fca311;
+
 $primary-color: #7A679B;
 $secondary-color: #685155;
 $tertiary-color: #8B85C1;
 $light-color: #D4CDF4;
 $other-color: #815E5B;
+
 
 body { 
   margin: 0;
@@ -49,11 +56,24 @@ body {
   }
 }
 
-.flameDiv {
+.container {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: 0 30px;
-  margin: auto;
+  margin: 20px 30px; 
+  padding: 0px 0px 20px 0;
+  border: 1px solid $light-color;
+  background: $secondary-color;
+  border-radius: 10px;
+  -webkit-box-shadow: 4px 6px 4px 0px $secondary-color;
+  -moz-box-shadow: 4px 6px 4px 0px $secondary-color;
+  box-shadow: 4px 6px 4px 0px $secondary-color;
+}
+
+.graphDiv {
+  display: block;
+  margin: 0 20px; 
+  padding: 0 20px;
 }
 
 .d3-flame-graph-tip {
@@ -67,10 +87,14 @@ body {
   color: whitesmoke;
 }
 
+.partition {
+  padding: 0 40px 20px 40px;
+}
 
-#flame-title {
-  padding-top: 20px;
-    text-align: center;
-    color: $secondary-color;
-    font-size: x-large;
-  }
+
+.graph-title {
+  margin: 10px 0;
+  text-align: center;
+  color: $light-color;
+  font-size: x-large;
+}

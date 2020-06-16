@@ -164,6 +164,6 @@ export default class D3Tree extends Component {
   }
 
   render() {
-    return <div ref={this.treeRef}></div>;
+    return <div ref={this.treeRef}></div>
   }
 }
