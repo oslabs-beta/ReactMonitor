@@ -1,4 +1,4 @@
-import sendContentScript from './sendContentScript';
+const sendContentScript = require('./sendContentScript');
 
 module.exports = function (container) {
   const fiberRoot = container._reactRootContainer._internalRoot;
