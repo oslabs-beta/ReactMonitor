@@ -15,7 +15,7 @@ To be able to use the application, users can:
   - Require/Import the package\
   `import reactMonitor from 'reactfibermonitor'`\
   or\
-  `const reactMonitor = require('reactmonitor')`
+  `const reactMonitor = require('reactfibermonitor')`
   - Invoke React Monitor with an input of the DOM element that you are rendering the React Element into
     ```
     const container = document.querySelector('#root');
