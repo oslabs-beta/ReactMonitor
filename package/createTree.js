@@ -135,6 +135,7 @@ const compareStateAndProps = (node, prevNode, parentShapeProps) => {
 
   // helper function - that accepts the node - Host Root
   function treeGraphFactory(fiber) {
+    console.log("fiber -",fiber);
     // create a treeGraph
     const treeGraph = new Node(fiber.type.name, null, [], fiber); // Represent the top most Element (like App);
     const helper = (fiber, treeGraph) => {
@@ -198,6 +199,7 @@ function treeCreator(hostRoot, treeGraph = null) {
   // 2.) prune treeGraph
   deleteParent(treeGraph);
   delete treeGraph.parent;
+  console.log("treeGraph after delete =", treeGraph);
 
   // 3.) enhance treeGraph 
   // by comparing state and props in prevTreeGraph and treeGraph(current)
