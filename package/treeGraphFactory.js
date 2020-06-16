@@ -1,4 +1,4 @@
- const Node = require('./newNode');
+ const { Node } = require('./newNode');
  
  // helper function - that accepts the node - Host Root
  module.exports = function (fiber){
