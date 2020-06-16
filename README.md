@@ -10,7 +10,7 @@ By using the ReactMonitor Chrome DevTool, beginning and experienced developers a
 To be able to use the application, users can:
 - Download the 'ReactMonitor' Google Chrome extension from [The Chrome Web Store](https://chrome.google.com/webstore/detail/reactmonitor)
 - Run the NPM package in your own codebase by following these steps:
-  - Install the package\
+  - Install the [package](https://www.npmjs.com/package/reactfibermonitor)\
   `npm install reactmonitor`
   - Require/Import the package\
   `import reactMonitor from 'reactmonitor'`\
