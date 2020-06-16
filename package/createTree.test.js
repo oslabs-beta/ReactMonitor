@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { act } from 'react-dom/test-utils';
-import createTree from './createTree';
+import treeGraphFactory from './createTree';
 import TicTacToe from '../mockData/ticTacToe';
 
 let container;
