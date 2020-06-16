@@ -1,4 +1,5 @@
-module.exports = function (root){
+
+function deleteParent(root){
 
   if (root.parent) {
     delete root.parent;
@@ -8,3 +9,7 @@ module.exports = function (root){
   }
 
 }
+
+
+
+module.exports.deleteParent = deleteParent;
