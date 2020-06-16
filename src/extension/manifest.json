@@ -4,7 +4,9 @@
   "version": "1.0.0",
   "devtools_page": "devtools.html",
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "contextMenus",
+    "<all_urls>"
   ],
   "content_scripts": [
     {
@@ -21,6 +23,11 @@
       "backgroundScript.js"
     ],
     "persistent": false
+  },
+  "icons": {
+    "16": "./assets/rm-icon16.png",
+    "48": "./assets/rm-icon-48.png",
+    "128": "./assets/rm-icon-128.png"
   },
   "externally_connectable": {
     "ids": [
