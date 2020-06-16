@@ -1,6 +1,6 @@
 {
   "name": "reactmonitor",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "Visualize React's component tree performance and optimization suggestions",
   "main": "App.js",
   "babel": {
