@@ -1,6 +1,6 @@
 {
-  "name": "reactmonitor",
-  "version": "1.0.2",
+  "name": "reactfibermonitor",
+  "version": "1.0.0",
   "description": "Visualize React's component tree performance and optimization suggestions",
   "main": "App.js",
   "babel": {
@@ -16,14 +16,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/simple-sifu/ReactMonitor.git"
+    "url": "git+https://github.com/oslabs-beta/ReactMonitor"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/simple-sifu/ReactMonitor/issues"
+    "url": "https://github.com/oslabs-beta/ReactMonitor/issues"
   },
-  "homepage": "https://github.com/simple-sifu/ReactMonitor#readme",
+  "homepage": "https://github.com/oslabs-beta/ReactMonitor#readme",
   "dependencies": {
     "cpy-cli": "^3.1.1",
     "d3": "^5.16.0",

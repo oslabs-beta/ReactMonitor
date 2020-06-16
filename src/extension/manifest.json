@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "devtools_page": "devtools.html",
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "contextMenus"
   ],
   "content_scripts": [
     {
