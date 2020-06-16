@@ -1,7 +1,7 @@
-import JSONStringify from './JSONStringify';
+const JSONStringify = require('./JSONStringify');
 
-export default class Node {
-    constructor(name, parent, children, fiber) {
+function Node(name, parent, children, fiber) {
+
       this.name = name;
       this.parent = parent;
       this.value = Number(fiber.actualDuration.toFixed(2));
@@ -26,6 +26,9 @@ export default class Node {
         this.type = fiber.type;
       }
       this.tag = fiber.tag;
-    }
   
+  }
+
+  module.exports = {
+    Node: Node
   }

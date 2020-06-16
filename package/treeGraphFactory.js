@@ -1,7 +1,7 @@
- import Node from './newNode';
+ const Node = require('./newNode');
  
  // helper function - that accepts the node - Host Root
- export default function treeGraphFactory(fiber) {
+ module.exports = function (fiber){
     console.log("fiber -",fiber);
     // create a treeGraph
     const treeGraph = new Node(fiber.type.name, null, [], fiber); // Represent the top most Element (like App);

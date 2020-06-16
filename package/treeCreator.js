@@ -1,8 +1,7 @@
-import treeGraphFactory from './treeGraphFactory';
-import deleteParent from './deleteParent';
+const treeGraphFactory = require('./treeGraphFactory');
+const deleteParent = require('./deleteParent');
 
-// let prevTreeGraph = null;
-export default function treeCreator(hostRoot, treeGraph = null) {
+module.exports = function (hostRoot, treeGraph = null){
 
     // 1.) create treeGraph
     if (hostRoot.child) {
@@ -24,5 +23,4 @@ export default function treeCreator(hostRoot, treeGraph = null) {
   
   
     return treeGraph;
-  
-  }
+}
