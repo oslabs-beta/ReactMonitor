@@ -129,7 +129,6 @@ export default class D3Tree extends Component {
                          <br><strong>Props</strong>: ${d.data.stats.props}<br>
                          <br><strong>Tag</strong>: ${d.data.tag}<br>
                          <br><strong>EffectTag</strong>: ${d.data.stats.effectTag}<br>
-                         <br><strong>Render Start</strong>: ${d.data.stats.renderStart} seconds<br>
                          <br><strong>Render Time</strong>: ${d.data.stats.renderTotal} seconds</p>
                          `, this)
           .style('left', (d3.event.pageX) + 'px')
@@ -164,6 +163,6 @@ export default class D3Tree extends Component {
   }
 
   render() {
-    return <div ref={this.treeRef}></div>
+    return <div ref={this.treeRef}></div>;
   }
 }
