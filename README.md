@@ -31,22 +31,22 @@ To be able to use the application, users can:
 
 As an open-sourced project, ReactMonitor gladly accepts help whenever possible. If you have suggestions for improvements or run into any bugs, please feel free to open a github issue after checking whether no such issue has been filed yet. When you file a github issue, please include the following information:
 
-#### Description\
-##### Steps to Reproduce\
-###### 1.\
-###### 2.\
-###### 3.\
-##### Expected behavior:\
-##### Actual behavior:\
-##### Reproduces how often:\
-##### Versions: x.x\
+#### Description
+##### Steps to Reproduce
+###### 1.
+###### 2.
+###### 3.
+##### Expected behavior:
+##### Actual behavior:
+##### Reproduces how often:
+##### Versions: x.x
 ##### Additional Information:
 
 ## Authors
 
-Rudo Hengst [@RudoH](https://github.com/RudoH)\
-Lia Pham [@lpham598](https://github.com/lpham598)\
-Tommy Han [@simple-sifu](https://github.com/simple-sifu)
+Rudo Hengst: [@RudoH](https://github.com/RudoH)\
+Lia Pham:    [@lpham598](https://github.com/lpham598)\
+Tommy Han:   [@simple-sifu](https://github.com/simple-sifu)
 
 ## License 
 
