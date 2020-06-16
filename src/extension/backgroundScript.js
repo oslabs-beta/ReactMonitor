@@ -14,6 +14,10 @@ chrome.runtime.onConnect.addListener((port) => {
   });
 });
 
+// chrome.runtime.onDisconnect.addListener(() => {
+//   // remove port
+// });
+
 // listen for message from contentScript
 chrome.runtime.onMessage.addListener((msg) => {
   // reassign the treeGraph
