@@ -12,23 +12,24 @@ export default class FlameChart extends Component {
 
   componentDidMount() {
     const { name, children, value } = this.props;
+    document.querySelectorAll('.d3-flame-graph-tip').forEach(el => el.remove());
     this.createFlameGraph({ name, children, value })
   }
 
   componentDidUpdate() {
     const { name, children, value } = this.props;
+    document.querySelectorAll('.d3-flame-graph-tip').forEach(el => el.remove());
     this.createFlameGraph({ name, children, value })
   }
 
   createFlameGraph(data) {
-    let pageWidth = window.innerWidth
-    console.log(window.innerWidth)
-    let margin = { right: 30, left: 30, }
+    let pageWidth = document.getElementById('flame-container').clientWidth;
+    const margin = { right: 30, left: 30 }
 
     let chart = flamegraph()
       .width(pageWidth - margin.right - margin.left)
       .cellHeight(20)
-      .transitionDuration(750)
+      .transitionDuration(400)
       .minFrameSize(5)
       .transitionEase(d3.easeCubic)
       .sort(true)
@@ -51,9 +52,9 @@ export default class FlameChart extends Component {
 
   render() {
     return (
-      <div>
-        <h3 id="flame-title">Render Times Flame Graph</h3>
-        <div className="flameDiv" ref={this.flamegraphRef}></div>
+      <div class="container" id="flame-container">
+        <h3 class="graph-title">Render Times Flame Graph</h3>
+        <div className="graphDiv" ref={this.flamegraphRef}></div>
       </div>
     )
   }
