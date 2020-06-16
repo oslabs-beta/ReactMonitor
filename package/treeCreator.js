@@ -1,5 +1,5 @@
 const treeGraphFactory = require('./treeGraphFactory');
-const deleteParent = require('./deleteParent');
+const { deleteParent } = require('./deleteParent');
 
 module.exports = function (hostRoot, treeGraph = null){
 
