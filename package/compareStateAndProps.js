@@ -1,4 +1,4 @@
-export default compareStateAndProps = (node, prevNode, parentShapeProps) => {
+module.exports = (wasMounted, node, prevNode, parentShapeProps) => {
     // compare state and props properties on stats properties for both nodes
     // if same - treeGraph.stats.stateOrPropsChanged - false
     if (node && prevNode) {
