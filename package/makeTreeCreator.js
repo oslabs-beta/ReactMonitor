@@ -9,7 +9,7 @@ module.exports = function (){
   let wasMounted = false;
   let prevTreeGraph = null;
 
-  return treeCreator(tree);
+  return treeCreator;
 
   function treeCreator(hostRoot, treeGraph = null) {
 
