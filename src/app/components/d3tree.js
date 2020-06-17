@@ -108,7 +108,12 @@ export default class D3Tree extends Component {
       .append('circle')
       .attr('stroke', (d) => (d.children ? '#555' : '#999'))
       .attr('stroke-width', (d) => 1)
-      .attr('fill', (d) => d.data.nodeSvgShape.shapeProps.fill)
+      .attr('fill', function (d) {
+        if (d.data.nodeSvgShape) {
+          return d.data.nodeSvgShape.shapeProps.fill
+        }
+        return 'gray'
+      })
       .attr('r', 5)
 
       // tooltip MouseOver
@@ -144,7 +149,7 @@ export default class D3Tree extends Component {
         tooltipDiv.transition()
           .duration(400)
           .style('opacity', 0);
-      });
+      })
 
     node
       .append('text')

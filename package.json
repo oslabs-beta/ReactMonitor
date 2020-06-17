@@ -1,6 +1,6 @@
 {
-  "name": "reactmonitorfiber",
-  "version": "1.0.0",
+  "name": "reactfibermonitor",
+  "version": "1.0.1",
   "description": "Visualize React's component tree performance and optimization suggestions",
   "main": "App.js",
   "babel": {
