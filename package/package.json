@@ -1,7 +1,7 @@
 {
-  "name": "npm-reactmonitor-test",
-  "version": "1.0.13",
-  "description": "",
+  "name": "reactmonitorfiber",
+  "version": "1.0.0",
+  "description": "Visualize React's component tree performance and optimization suggestions",
   "main": "createTree.js",
   "author": "React Monitor",
   "license": "ISC"
