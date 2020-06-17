@@ -7,7 +7,7 @@ module.exports = function (container) {
   const treeCreator = makeTreeCreator();
 
   // on first load use initial render.
-  window.addEventListener('load', () => sendContentScript(hostRoot))
+  window.addEventListener('load', () => sendContentScript(treeCreator, hostRoot))
 
   window.addEventListener('click', () => {
     setTimeout(() => {
