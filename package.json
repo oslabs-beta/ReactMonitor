@@ -1,5 +1,5 @@
 {
-  "name": "reactfibermonitor",
+  "name": "reactmonitor",
   "version": "1.0.1",
   "description": "Visualize React's component tree performance and optimization suggestions",
   "main": "App.js",
