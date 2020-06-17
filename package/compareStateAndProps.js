@@ -31,6 +31,7 @@ function compareStateAndProps(wasMounted, node, prevNode, parentShapeProps) {
     if (node.children.length) {
       for (let i = 0; i < node.children.length; i += 1) {
         compareStateAndProps(
+          wasMounted,
           node.children[i],
           prevNode.children[i],
           node.nodeSvgShape.shapeProps
@@ -48,6 +49,7 @@ function compareStateAndProps(wasMounted, node, prevNode, parentShapeProps) {
     if (node.children.length) {
       for (let i = 0; i < node.children.length; i += 1) {
         compareStateAndProps(
+          wasMounted,
           node.children[i],
           null,
           node.nodeSvgShape.shapeProps
@@ -64,7 +66,7 @@ function compareStateAndProps(wasMounted, node, prevNode, parentShapeProps) {
     }
     if (node.children.length) {
       for (let i = 0; i < node.children.length; i += 1) {
-        compareStateAndProps(node.children[i]);
+        compareStateAndProps(wasMounted, node.children[i]);
       }
     }
   }
