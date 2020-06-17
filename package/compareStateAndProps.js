@@ -1,6 +1,7 @@
 function compareStateAndProps(wasMounted, node, prevNode, parentShapeProps) {
   // compare state and props properties on stats properties for both nodes
   // if same - treeGraph.stats.stateOrPropsChanged - false
+  console.log("node -", node, ", prevNode -", prevNode);
   if (node && prevNode) {
     // check if the node's type is a string
     // yes? give it a color of the parent - because Composite Component renders(or not) Host Component
