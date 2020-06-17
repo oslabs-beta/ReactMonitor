@@ -70,9 +70,7 @@ export default class D3Tree extends Component {
         -margin.top,
         this.width + margin.left + margin.right,
         x1 - x0 + root.dx * 2 + margin.top + margin.bottom,
-      ])
-      .attr("style", "border: thin red line")
-      .attr()
+      ]);
 
     const g = svg
       .append('g')
