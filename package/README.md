@@ -4,7 +4,8 @@ Quickly visualize React's component tree performance for improved onboarding and
 ## What does it do
 By using the ReactMonitor Chrome DevTool, beginning and experienced developers alike are able to get a visual representation of an existing codebase that they are working on. Built with React, this tool will dynamically traverse the fiber root object behind the scenes, displaying state, props, render times and the type of components on the page.
 
-> Placeholder for screenshot/gif
+
+![readmeDemo](./src/assets/readmeDemo.gif)
 
 ## How to install and run
 To be able to use the application, users can:
