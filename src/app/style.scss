@@ -4,6 +4,7 @@ $tertiary-color: #8B85C1;
 $light-color: #D4CDF4;
 $other-color: #815E5B;
 
+
 body { 
   margin: 0;
   background: $tertiary-color;
@@ -14,8 +15,8 @@ body {
   background: $primary-color;
   display: flex;
   justify-content: space-evenly;
-  -webkit-box-shadow: 0px 10px 2px 0px $secondary-color;
-  -moz-box-shadow: 0px 10px 2px 0px $secondary-color;
+  -webkit-box-shadow: 0px 4px 2px 0px $secondary-color;
+  -moz-box-shadow: 0px 4px 2px 0px $secondary-color;
   box-shadow: 0px 4px 2px 0px $secondary-color;
   li {
     list-style: none;
@@ -49,16 +50,46 @@ body {
   }
 }
 
-.flameDiv {
+.container {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: 0 30px;
-  margin: auto;
+  margin: 20px 30px; 
+  padding: 0px 0px 20px 0;
+  border: 1px solid $light-color;
+  background: $secondary-color;
+  border-radius: 10px;
+  -webkit-box-shadow: 4px 6px 4px 0px $secondary-color;
+  -moz-box-shadow: 4px 6px 4px 0px $secondary-color;
+  box-shadow: 4px 6px 4px 0px $secondary-color;
 }
 
-#flame-title {
-  padding-top: 20px;
+.graphDiv {
+  margin: 0 20px; 
+  padding: 0 20px;
+  width: 100%;
+  height: 100%;
+}
+
+.d3-flame-graph-tip {
+  padding: 8px;
+  border-radius: 5px;
+  -webkit-box-shadow: 4px 4px 2px 0px $secondary-color;
+  -moz-box-shadow: 4px 4px 2px 0px $secondary-color;
+  box-shadow: 4px 4px 2px 0px $secondary-color;
+  background-color: $primary-color;
+  font-size: large;
+  color: whitesmoke;
+}
+
+.partition {
+  padding: 0 40px 20px 40px;
+}
+
+
+.graph-title {
+  margin: 10px 0;
   text-align: center;
-  color: $secondary-color;
+  color: $light-color;
   font-size: x-large;
 }

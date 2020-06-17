@@ -26,3 +26,23 @@ chrome.runtime.onMessage.addListener((msg) => {
     });
   }
 });
+
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.contextMenus.create({
+    id: 'reactmonitor',
+    title: 'Reactmonitor',
+    contexts: ['page', 'selection', 'image', 'link'],
+  });
+})
+
+
+
+chrome.contextMenus.onClicked.addListener(({ menuItemId }) => {
+  const options = {
+    type: 'panel',
+    width: 960,
+    height: window.screen.availHeight,
+    url: chrome.runtime.getURL('index.html'),
+  };
+  if (menuItemId === 'reactmonitor') chrome.windows.create(options);
+});
