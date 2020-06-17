@@ -1,6 +1,6 @@
 {
   "name": "reactmonitorfiber",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Visualize React's component tree performance and optimization suggestions",
   "main": "createTree.js",
   "repository": {
