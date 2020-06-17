@@ -43,7 +43,8 @@ export default class FlameChart extends Component {
 
     d3.select(this.flamegraphRef.current)
       .datum(data)
-      .call(chart);
+      .call(chart)
+
 
     if (document.querySelectorAll('.partition').length > 1) {
       document.querySelectorAll('.partition')[1].remove();

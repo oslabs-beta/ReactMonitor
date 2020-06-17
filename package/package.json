@@ -1,8 +1,16 @@
 {
-  "name": "npm-reactmonitor-test",
-  "version": "1.0.13",
-  "description": "",
+  "name": "reactmonitorfiber",
+  "version": "1.0.1",
+  "description": "Visualize React's component tree performance and optimization suggestions",
   "main": "createTree.js",
-  "author": "React Monitor",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oslabs-beta/ReactMonitor"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oslabs-beta/ReactMonitor/issues"
+  },
+  "homepage": "https://github.com/oslabs-beta/ReactMonitor#readme"
 }
