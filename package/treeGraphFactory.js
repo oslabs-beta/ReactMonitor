@@ -1,8 +1,9 @@
  const { Node } = require('./newNode');
  
+ let i = 1;
  // helper function - that accepts the node - Host Root
  module.exports = function (fiber){
-    console.log("fiber -",fiber);
+
     // create a treeGraph
     const treeGraph = new Node(fiber.type.name, null, [], fiber); // Represent the top most Element (like App);
     const helper = (fiber, treeGraph) => {
