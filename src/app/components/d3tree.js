@@ -129,7 +129,7 @@ export default class D3Tree extends Component {
                          <br><strong>Props</strong>: ${d.data.stats.props}<br>
                          <br><strong>Tag</strong>: ${d.data.tag}<br>
                          <br><strong>EffectTag</strong>: ${d.data.stats.effectTag}<br>
-                         <br><strong>Render Time</strong>: ${d.data.stats.renderTotal} seconds</p>
+                         <br><strong>Render Time</strong>: ${d.data.stats.renderTotal}ms</p>
                          `, this)
           .style('left', (d3.event.pageX) + 'px')
           .style('top', (d3.event.pageY) + 'px');
