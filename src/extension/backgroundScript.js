@@ -14,10 +14,6 @@ chrome.runtime.onConnect.addListener((port) => {
   });
 });
 
-// chrome.runtime.onDisconnect.addListener(() => {
-//   // remove port
-// });
-
 // listen for message from contentScript
 chrome.runtime.onMessage.addListener((msg) => {
   // reassign the treeGraph
@@ -44,9 +40,7 @@ chrome.runtime.onInstalled.addListener(() => {
 chrome.contextMenus.onClicked.addListener(({ menuItemId }) => {
   const options = {
     type: 'panel',
-    left: 0,
-    top: 0,
-    width: 380,
+    width: 960,
     height: window.screen.availHeight,
     url: chrome.runtime.getURL('index.html'),
   };

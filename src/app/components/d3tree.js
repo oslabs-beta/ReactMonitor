@@ -81,7 +81,7 @@ export default class D3Tree extends Component {
     const link = g
       .append('g')
       .attr('fill', 'none')
-      .attr('stroke', '#555')
+      .attr('stroke', '#D4CDF4')
       .attr('stroke-opacity', 0.4)
       .attr('stroke-width', 1.5)
       .selectAll('path')
@@ -163,6 +163,11 @@ export default class D3Tree extends Component {
   }
 
   render() {
-    return <div ref={this.treeRef}></div>;
+    return (
+      <div class="container" id="tree-container">
+        <h3 class="graph-title">Render Times Tree Graph</h3>
+        <div className="graphDiv" ref={this.treeRef}></div>
+      </div>
+    )
   }
 }

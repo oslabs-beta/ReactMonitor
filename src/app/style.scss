@@ -65,9 +65,10 @@ body {
 }
 
 .graphDiv {
-  display: block;
   margin: 0 20px; 
   padding: 0 20px;
+  width: 100%;
+  height: 100%;
 }
 
 .d3-flame-graph-tip {
