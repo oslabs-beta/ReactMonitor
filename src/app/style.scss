@@ -93,3 +93,8 @@ body {
   color: $light-color;
   font-size: x-large;
 }
+
+foreignObject {
+  box-sizing: border-box;
+  border: solid 1px $primary-color; 
+}

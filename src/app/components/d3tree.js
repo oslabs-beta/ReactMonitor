@@ -108,7 +108,7 @@ export default class D3Tree extends Component {
       .append('circle')
       .attr('stroke', (d) => (d.children ? '#555' : '#999'))
       .attr('stroke-width', (d) => 1)
-      .attr('fill', () => '#fff')
+      .attr('fill', (d) => d.data.nodeSvgShape.shapeProps.fill)
       .attr('r', 5)
 
       // tooltip MouseOver
@@ -164,8 +164,8 @@ export default class D3Tree extends Component {
 
   render() {
     return (
-      <div class="container" id="tree-container">
-        <h3 class="graph-title">Render Times Tree Graph</h3>
+      <div className="container" id="tree-container">
+        <h3 className="graph-title">Render Times Tree Graph</h3>
         <div className="graphDiv" ref={this.treeRef}></div>
       </div>
     )

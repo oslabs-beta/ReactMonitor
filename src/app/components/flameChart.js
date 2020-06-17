@@ -28,7 +28,7 @@ export default class FlameChart extends Component {
 
     let chart = flamegraph()
       .width(pageWidth - margin.right - margin.left)
-      .cellHeight(20)
+      .cellHeight(25)
       .transitionDuration(400)
       .minFrameSize(5)
       .transitionEase(d3.easeCubic)
@@ -52,8 +52,8 @@ export default class FlameChart extends Component {
 
   render() {
     return (
-      <div class="container" id="flame-container">
-        <h3 class="graph-title">Render Times Flame Graph</h3>
+      <div className="container" id="flame-container">
+        <h3 className="graph-title">Render Times Flame Graph</h3>
         <div className="graphDiv" ref={this.flamegraphRef}></div>
       </div>
     )
