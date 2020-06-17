@@ -12,4 +12,4 @@ function deleteParent(root){
 
 
 
-module.exports.deleteParent = deleteParent;
+module.exports = deleteParent;
