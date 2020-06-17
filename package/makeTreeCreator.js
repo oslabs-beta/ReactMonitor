@@ -10,8 +10,6 @@ module.exports = function (){
   let wasMounted = false;
   let prevTreeGraph = null;
 
-  return treeCreator;
-
   function treeCreator(hostRoot, treeGraph = null) {
 
     console.log("prevTreeGraph -", prevTreeGraph);
@@ -36,4 +34,5 @@ module.exports = function (){
     return treeGraph;
   
   }
+  return treeCreator;
 }
