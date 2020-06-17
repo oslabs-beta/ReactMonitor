@@ -2,6 +2,7 @@ const treeGraphFactory = require('./treeGraphFactory');
 const deleteParent = require('./deleteParent');
 const compareStateAndProps = require('./compareStateAndProps');
 
+
 module.exports = function (){
 
   // first time load these closure variables
