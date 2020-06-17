@@ -44,15 +44,10 @@ As an open-sourced project, ReactMonitor gladly accepts help whenever possible. 
 
 ## Authors
 
-**Rudo Hengst:** [@RudoH](https://github.com/RudoH)\
-**Lia Pham:**    [@lpham598](https://github.com/lpham598)\
-**Tommy Han:**   [@simple-sifu](https://github.com/simple-sifu)
+Rudo Hengst: [@RudoH](https://github.com/RudoH)\
+Lia Pham:    [@lpham598](https://github.com/lpham598)\
+Tommy Han:   [@simple-sifu](https://github.com/simple-sifu)
 
 ## License 
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details
-
-
-
-
-
