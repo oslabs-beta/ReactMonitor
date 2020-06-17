@@ -51,6 +51,6 @@
     };
     // invoke the helper function
     helper(fiber, treeGraph); // fiber is an App Fiber
-    console.log("treeGraph =", treeGraph);
+    console.log("treeGraphFactory =", treeGraph);
     return treeGraph;
   }
