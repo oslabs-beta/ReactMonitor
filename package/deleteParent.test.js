@@ -9,6 +9,7 @@ describe('test deleteParent', () => {
 
     const prunedTreeGraph = deleteParent(treeGraph);
 
+    console.log("prunedTreeGraph -", prunedTreeGraph);
     expect(prunedTreeGraph.name).toBe('h1');
     expect(prunedTreeGraph.value).toBe(9);
     expect(prunedTreeGraph.tag).toBe(5);

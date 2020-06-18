@@ -12,7 +12,6 @@ module.exports = function (){
 
   function treeCreator(hostRoot, treeGraph = null) {
 
-    console.log("prevTreeGraph -", prevTreeGraph);
     // 1.) create treeGraph
     if (hostRoot.child) {
       // recursively traverse App Fiber Tree and create treeGraph

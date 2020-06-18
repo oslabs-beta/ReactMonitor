@@ -1,23 +1,25 @@
 @startuml treeCreatorUML
-                                 
+
+control MakeTreeCreator                             
 control TreeCreator           
-control TreeGraphFromHostCreator  
+control TreeGraphFactory  
 entity Node  
 control helper
-entity recursivelyDeleteParent
+entity deleteParent
 entity compareStateAndProps
 entity Window
 
-
-TreeCreator -> TreeGraphFromHostCreator : treeGraphFromHostCreator(hostRoot.child);
-TreeGraphFromHostCreator -> Node : treeGraph = new Node(name, null, [], fiber);
-TreeGraphFromHostCreator -> helper: helper(fiber, treeGraph)
+MakeTreeCreator -> TreeCreator : closed over \nwasMounted, prevTreeGraph, \nreturns function 
+TreeCreator -> TreeGraphFactory : treeGraphFactor(fiberRoot);
+TreeGraphFactory -> Node : treeGraph = new Node(name, null, [], fiber);
+TreeGraphFactory -> helper: helper(fiber, treeGraph)
 helper -> helper: recursively reads Fiber child, sibling \nand creates array of children, parent.children
-TreeCreator <- TreeGraphFromHostCreator: return treeGraph
-TreeCreator -> recursivelyDeleteParent: delete parents from treeGraph
-TreeCreator -> TreeCreator: tempTreeGraph = JSON.parse(JSON.stringify(treeGraph))
+TreeCreator <- TreeGraphFactory: return treeGraph
+TreeCreator -> deleteParent: delete parents from treeGraph
+TreeCreator <- deleteParent: return pruned treeGraph
 TreeCreator -> compareStateAndProps: compareStateAndProps(treeGraph, prevTreeGraph, null)
-compareStateAndProps -> compareStateAndProps: 1.)initial load  \n2.)load when diff \n3.)load when no prevNode
+compareStateAndProps -> compareStateAndProps: update node colors based on \n1.)initial load  \n2.) when nodes diff \n3.)no prevNode
+TreeCreator <- compareStateAndProps: return TreeGraph with colored nodes
 TreeCreator -> TreeCreator: prevTreeGraph = tempTreeGraph \nwasMounted = true;
-TreeCreator -> Window: postMessage({action: 'npmToContent', payload: treeGraph})
+TreeCreator -> Window: send TreeGraph
 @enduml
