@@ -1,0 +1,19 @@
+@startuml windowUML
+
+boundary App               
+boundary Container           
+control Window                                   
+control TreeCreator 
+entity D3Tree  
+entity D3Tree        
+
+App -> Container : setState is called
+Container -> Container : render method called \nfiberRoot = container._reactRootContainer._internalRoot 
+Container -> Window: check every 20ms \nif Virtual DOM has changed.
+Window -> TreeCreator : treeCreator(fiberTree)
+Window <- TreeCreator : returns treeGraph
+Window -> Container: sends treeGraph
+Container -> D3Tree: recieves treeGraph
+D3Tree -> D3Tree: present tree using \nD3Tree or D3Flame visual.
+
+@enduml
