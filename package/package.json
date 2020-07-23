@@ -1,24 +1,42 @@
 {
-  "name": "reactmonitorfiber",
-  "version": "1.0.11",
+  "_from": "reactmonitorfiber",
+  "_id": "reactmonitorfiber@1.0.11",
+  "_inBundle": false,
+  "_integrity": "sha512-17ru2xLe/osiMB5Dfk2kBCX/1XMPjJ/YBb8B7eBzKlGhe7pevJ82CQgJwHgl/HsKWFJcbuLtiEibQdKTY4pGTQ==",
+  "_location": "/reactmonitorfiber",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "reactmonitorfiber",
+    "name": "reactmonitorfiber",
+    "escapedName": "reactmonitorfiber",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#DEV:/",
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/reactmonitorfiber/-/reactmonitorfiber-1.0.11.tgz",
+  "_shasum": "ef17b17b90312e8ae1a006307905317118d88f9f",
+  "_spec": "reactmonitorfiber",
+  "_where": "/Users/usr1/edp/codesmith/react_p2",
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/oslabs-beta/ReactMonitor/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
   "description": "Visualize React's component tree performance and optimization suggestions",
+  "homepage": "https://github.com/oslabs-beta/ReactMonitor#readme",
+  "license": "ISC",
   "main": "createTree.js",
+  "name": "reactmonitorfiber",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oslabs-beta/ReactMonitor.git"
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/oslabs-beta/ReactMonitor/issues"
-  },
-  "homepage": "https://github.com/oslabs-beta/ReactMonitor#readme",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "devDependencies": {
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.12"
-  }
+  "version": "1.0.11"
 }
