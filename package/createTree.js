@@ -10,16 +10,17 @@ module.exports = function (container) {
   window.addEventListener('load', () => sendContentScript(treeCreator, hostRoot))
 
   window.addEventListener('click', () => {
-	console.log(".".repeat(40));
     setTimeout(() => {
       sendContentScript(treeCreator, hostRoot, fiberRoot.current);
     }, 200);
+	// to be overwritten by next pull request:
 	hostRoot = fiberRoot.current;
   });
 
   window.addEventListener('keyup', () => {
     setTimeout(() => {
       sendContentScript(treeCreator, hostRoot, fiberRoot.current);
+		// to be overwritten by next pull request:
 		hostRoot = fiberRoot.current;
     }, 200);
   });
