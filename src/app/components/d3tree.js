@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
+import TimeTravel from './timeTravel';
+import {deleteHtmlElement} from './helperFunctions'
 
 let root;
 
 export default class D3Tree extends Component {
   constructor(props) {
     super(props);
+    this.state={
+      htmlElement:true
+    }
     this.treeRef = React.createRef();
     this.maked3Tree = this.maked3Tree.bind(this);
     this.removed3Tree = this.removed3Tree.bind(this);
+    this.removeHtml=this.removeHtml.bind(this)
     this.width = 500
   }
 
@@ -29,6 +35,10 @@ export default class D3Tree extends Component {
   componentWillUnmount() {
     this.removed3Tree();
   }
+  removeHtml(){
+    if(this.state.htmlElement)  this.setState({htmlElement:false})
+    if(!this.state.htmlElement)  this.setState({htmlElement:true})
+  }
   removed3Tree() {
     const { current } = this.treeRef;
     document.querySelectorAll('.tooltip').forEach(el => el.remove());
@@ -38,10 +48,18 @@ export default class D3Tree extends Component {
   }
 
   tree(data) {
-    const root = d3.hierarchy(data);
-    root.dx = 10;
-    root.dy = this.width / (root.height + 1);
-    return d3.tree().nodeSize([root.dx, root.dy])(root);
+    if(this.state.htmlElement){
+       data = deleteHtmlElement(data)
+      const root = d3.hierarchy(data);
+      root.dx = 10;
+      root.dy = this.width / (root.height + 1);
+      return d3.tree().nodeSize([root.dx, root.dy])(root);
+    }else{
+     const root = d3.hierarchy(data);
+     root.dx = 10;
+     root.dy = this.width / (root.height + 1);
+     return d3.tree().nodeSize([root.dx, root.dy])(root);
+   }
   };
 
   maked3Tree(data) {
@@ -170,8 +188,10 @@ export default class D3Tree extends Component {
   render() {
     return (
       <div className="container" id="tree-container">
+        <button className='graph-title' onClick={this.removeHtml} >Hide HTML </button>
         <h3 className="graph-title">Render Times Tree Graph</h3>
         <div className="graphDiv" ref={this.treeRef}></div>
+        <TimeTravel oldState={this.props.oldState}/>
       </div>
     )
   }
