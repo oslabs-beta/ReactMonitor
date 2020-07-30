@@ -1,5 +1,5 @@
-const sendContentScript = require('./sendContentScript');
-const makeTreeCreator = require('./makeTreeCreator');
+const sendContentScript = require("./sendContentScript");
+const makeTreeCreator = require("./makeTreeCreator");
 
 module.exports = function (container) {
   const fiberRoot = container._reactRootContainer._internalRoot;
@@ -7,15 +7,17 @@ module.exports = function (container) {
   const treeCreator = makeTreeCreator();
 
   // on first load use initial render.
-  window.addEventListener('load', () => sendContentScript(treeCreator, hostRoot))
+  window.addEventListener("load", () =>
+    sendContentScript(treeCreator, hostRoot)
+  );
 
-  window.addEventListener('click', () => {
+  window.addEventListener("click", () => {
     setTimeout(() => {
       sendContentScript(treeCreator, hostRoot, fiberRoot.current);
     }, 200);
   });
 
-  window.addEventListener('keyup', () => {
+  window.addEventListener("keyup", () => {
     setTimeout(() => {
       sendContentScript(treeCreator, hostRoot, fiberRoot.current);
     }, 200);
