@@ -23,16 +23,5 @@
     "ids": ["*"]
   },
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
-
-  "web_accessible_resources": [
-    "package/compareStateAndProps.js",
-    "package/createTree.js",
-    "package/deleteParent.js",
-    "package/JSONStringify.js",
-    "package/makeTreeCreator.js",
-    "package/newNode.js",
-    "package/ReactWorkTags.js",
-    "package/sendContentScript.js",
-    "package/treeGraphFactory.js"
-  ]
+  "web_accessible_resources": ["/newNode.js"]
 }
