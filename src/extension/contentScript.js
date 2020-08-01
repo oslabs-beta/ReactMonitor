@@ -16,7 +16,7 @@ function injectScript(file, node) {
   const s0 = document.createElement("script"); //<script type= 'text/javascript' src= ''> consol.log("script injected")</script>
   s0.setAttribute("type", "text/javascript");
   // s0.setAttribute("src", file);
-  console.log(file, "injectedfile");
+  console.log(...file, "injectedfile");
   s0.innerText = `
 		console.log("script injected!!");
 		let tree = document.querySelector("#root");
@@ -28,7 +28,7 @@ function injectScript(file, node) {
 }
 
 setTimeout(() => {
-  injectScript(chrome.extension.getURL("package/newNode.js"), "body");
+  injectScript(chrome.extension.getURL("package"), "body");
 }, 1000);
 
 //what is the script element that will be injected to the HTML
