@@ -2,6 +2,7 @@
 window.addEventListener('message', (msg) => {
   // filter the incoming msg.data
   if (msg.data.action === 'npmToContent') {
+	console.log("fiber to ext:", msg.data );
     // send the message to the chrome - backgroundScript
     chrome.runtime.sendMessage({
       action: 'ContentToBackground',
