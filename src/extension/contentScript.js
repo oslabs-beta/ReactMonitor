@@ -13,13 +13,13 @@ window.addEventListener("message", (msg) => {
 function injectScript(file, node) {
   // test - inject javascript, access fibergraph
   const body0 = document.getElementsByTagName(node)[0];
-  const s0 = document.createElement("script");
+  const s0 = document.createElement("script"); //<script type= 'text/javascript' src= ''> consol.log("script injected")</script>
   s0.setAttribute("type", "text/javascript");
-  s0.setAttribute("src", file);
-  console.log("Injected");
+  // s0.setAttribute("src", file);
+  console.log(file, "injectedfile");
   s0.innerText = `
 		console.log("script injected!!");
-		let tree = document.querySelector("#container");
+		let tree = document.querySelector("#root");
 		let test0 = tree._reactRootContainer._internalRoot
 			.current.alternate.tag;
 		console.log(test0);
@@ -28,5 +28,7 @@ function injectScript(file, node) {
 }
 
 setTimeout(() => {
-  injectScript(chrome.runtime.getURL("/newNode.js"), "body");
+  injectScript(chrome.extension.getURL("package/newNode.js"), "body");
 }, 1000);
+
+//what is the script element that will be injected to the HTML
