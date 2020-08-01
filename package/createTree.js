@@ -3,7 +3,7 @@ const makeTreeCreator = require('./makeTreeCreator');
 
 module.exports = function (container) {
   const fiberRoot = container._reactRootContainer._internalRoot;
-  const hostRoot = fiberRoot.current;
+  let hostRoot = fiberRoot.current;
   const treeCreator = makeTreeCreator();
 
   // on first load use initial render.
