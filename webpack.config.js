@@ -10,7 +10,7 @@ module.exports = {
     devtools: "./src/extension/devtools.js",
     bundle: "./src/app/App.js",
     fiberTreeAnalyzer: "./package/createTree.js",
-    test: "./src/extension/test.js",
+    containerWrapper: "./package/containerWrapper.js",
   },
   output: {
     path: path.resolve(__dirname, "dist"),

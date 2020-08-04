@@ -1,6 +1,8 @@
 const sendContentScript = require("./sendContentScript");
 const makeTreeCreator = require("./makeTreeCreator");
 
+//this function will be invoked in containerWrapper.js
+
 module.exports = function (container) {
   const fiberRoot = container._reactRootContainer._internalRoot;
   const hostRoot = fiberRoot.current;
