@@ -29,10 +29,12 @@
     "d3": "^5.16.0",
     "d3-flame-graph": "^3.1.1",
     "d3-hierarchy": "^1.1.9",
+    "immutable": "^4.0.0-rc.12",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-flame-graph": "^1.4.0",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "react-treeview": "^0.4.7"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
