@@ -2,7 +2,7 @@ const sendContentScript = require('./sendContentScript');
 const makeTreeCreator = require('./makeTreeCreator');
 
 module.exports = function (container) {
-  const fiberRoot = container._reactRootContainer._internalRoot;
+  let fiberRoot = container._reactRootContainer._internalRoot;
   let hostRoot = fiberRoot.current;
   const treeCreator = makeTreeCreator();
 

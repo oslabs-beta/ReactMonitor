@@ -32,9 +32,7 @@ const deleteHtmlElement=(obj)=>{
 const componenetChangedState = (data) => {
 
     if(!data) return 
-    //  let newGraph=JSON.parse(JSON.stringify(data))
-    //  console.log(newGraph)
-    console.log('inside helper function',data)
+    
     const noChanges=[]
     const helper = (obj) =>{
         // console.log('obj',obj)

@@ -15,7 +15,7 @@ export default class stateChange extends Component {
       let current=this.props.currentState[index]
       let temp= JSON.parse(JSON.stringify(current? [current]:this.props.currentState))
       temp = componenetChangedState(deleteHtmlElement(temp))
-      console.log(temp)
+      return temp
     }
     render() {
         const {selectedcomponents} = this.state;
@@ -60,7 +60,8 @@ const ComponentsList2 = ({ components, selectedcomponents, onChange, isFirst, de
       selectedcomponents[componentId] = subSelections;
       onChange(selectedcomponents);
     }
-    console.log(this.props)
+    console.log('comp',components)
+    let counter=0
     return (
       <div>
         {components.map(component => (
@@ -73,6 +74,7 @@ const ComponentsList2 = ({ components, selectedcomponents, onChange, isFirst, de
               />
               {(component.children.length > 0 && selectedcomponents[component.name]) &&
                 <ComponentsList2 
+                  key={counter+=100}
                   components={component.children} 
                   selectedcomponents={selectedcomponents[component.name]} 
                   onChange={(subSelections) => handleSubcomponentsListChange(component.name, subSelections)}
@@ -99,12 +101,13 @@ class Checkbox2 extends Component {
         // }
     }
     render(){
-        
+        console.log('state',this.props.state)
+        console.log('props',this.props.state)
         return (
             <div className="checkbox">  
             <div className="checkbox__label" onClick={() => this.props.onChange(!this.props.selected)}>{this.props.label}</div>
-            <h5>State:{this.props.stats.state}</h5>
-            <h5>Props:{this.props.stats.props}</h5>
+            <h5>State:{this.props.state}</h5>
+            <h5>Props:{this.props.props}</h5>
           </div>
         )
     }

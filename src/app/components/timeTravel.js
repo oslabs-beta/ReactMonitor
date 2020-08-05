@@ -9,10 +9,9 @@ export default class timeTravel extends Component {
         super(props);
     }
     render() {
-        console.log(this.props)
         return (
             <div>
-                <Record logofTime={this.props.logofTime}/>
+                <Record logofTime={this.props.logofTime} index={this.props.index}/>
                 <Statechange currentState={this.props.currentState} index={this.props.index}/>
                 <Playbutton length={this.props.logofTime.length} index={this.props.index} handelPlay={this.props.handelPlay}/>
             </div>

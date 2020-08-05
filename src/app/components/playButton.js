@@ -5,7 +5,8 @@ export default class playButton extends Component {
         super(props)
         
         this.state = {
-          percentage: 0
+          percentage: 0,
+          play:false
         }
         
         this.nextStep = this.nextStep.bind(this)
@@ -13,7 +14,19 @@ export default class playButton extends Component {
       
       nextStep() {
         if(this.state.percentage === 100) return 
-        this.setState(prevState => ({ percentage: prevState.percentage + 20 }))
+
+        let timer = setInterval(() => {
+          if(this.state.percentage===0){
+            this.setState(prevState => ({ percentage: prevState.percentage + (100/this.props.length) }))
+          }
+          if(this.state.percentage >= 100) {
+            this.props.handelPlay('stop')
+            clearInterval(timer)
+          }else{
+            this.props.handelPlay()
+            this.setState(prevState => ({ percentage: prevState.percentage + (100/this.props.length) }))
+          }
+        }, 1000);
       }
       
       render() {
@@ -37,7 +50,11 @@ export default class playButton extends Component {
                 }} />
                 </div>
                 <div style={{ marginTop: '20px' }}>
-                    <button  onClick={() => this.setState({ percentage: 0 })}>Reset</button>
+                    <button  onClick={() => {
+                      console.log('reset')
+                      this.props.handelPlay('reset')
+                      this.setState({ percentage: 0 })
+                    }}>Reset</button>
                 </div>   
             </div>
         )

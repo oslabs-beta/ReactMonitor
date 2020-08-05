@@ -7,7 +7,7 @@ function Node(name, parent, children, fiber) {
       this.value = Number(fiber.actualDuration.toFixed(2));
       this.children = children;
       this.stats = {
-        state: JSON.stringify(fiber.memoizedState),
+        state: JSONStringify(fiber.memoizedState),
         props: JSONStringify(fiber.memoizedProps),
         effectTag: fiber.effectTag,
         type: typeof fiber.type,

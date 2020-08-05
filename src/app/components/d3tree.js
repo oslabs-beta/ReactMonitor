@@ -14,7 +14,8 @@ export default class D3Tree extends Component {
       htmlElement:false,
       timeTravel:[],
       index:0,
-      logofTime:[]
+      logofTime:[],
+      playing:false
     }
     this.treeRef = React.createRef();
     this.maked3Tree = this.maked3Tree.bind(this);
@@ -32,7 +33,13 @@ export default class D3Tree extends Component {
   }
   
   componentDidUpdate() {
-    const { name, children, stats } = this.props;
+    console.log('last one',this.props.oldState[this.state.index])
+    if(this.state.playing){
+      var { name, children, stats } = this.props.oldState[this.state.index];
+
+    }
+    if(!this.state.playing) var{ name, children, stats } = this.props.oldState[this.props.oldState.length-1];
+    
     const hierarchy = { name, children, stats };
     root = JSON.parse(JSON.stringify(hierarchy));
     this.maked3Tree(root);
@@ -57,9 +64,12 @@ export default class D3Tree extends Component {
     let temp=this.state.index
     if(!value){
       temp+=1
+      this.setState({playing:true})
       this.setState({index:temp})
+    }else if(value==='stop'){
+      return
     }else{
-      this.setState({index:1})
+      this.setState({index:0})
     }
   }
 
