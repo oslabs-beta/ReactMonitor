@@ -2,19 +2,25 @@ import React, { Component } from 'react';
 import * as d3 from 'd3';
 import TimeTravel from './timeTravel';
 import {deleteHtmlElement} from './helperFunctions'
+import {componenetChangedState} from './helperFunctions'
 
 let root;
+
 
 export default class D3Tree extends Component {
   constructor(props) {
     super(props);
     this.state={
-      htmlElement:true
+      htmlElement:false,
+      timeTravel:[],
+      index:0,
+      logofTime:[]
     }
     this.treeRef = React.createRef();
     this.maked3Tree = this.maked3Tree.bind(this);
     this.removed3Tree = this.removed3Tree.bind(this);
     this.removeHtml=this.removeHtml.bind(this)
+    this.handelPlay=this.handelPlay.bind(this)
     this.width = 500
   }
 
@@ -24,21 +30,39 @@ export default class D3Tree extends Component {
     root = JSON.parse(JSON.stringify(hierarchy));
     this.maked3Tree(root);
   }
-
+  
   componentDidUpdate() {
     const { name, children, stats } = this.props;
     const hierarchy = { name, children, stats };
     root = JSON.parse(JSON.stringify(hierarchy));
     this.maked3Tree(root);
+    if(this.state.timeTravel.length !==this.props.oldState.length){
+      let tempTimeTravel =[...this.props.oldState]
+      let tempLogofTime=[...this.state.logofTime]
+      tempLogofTime.push([this.props.oldState[this.props.oldState.length-1].name,this.props.oldState[this.props.oldState.length-1].value])
+      this.setState({timeTravel:tempTimeTravel,logofTime:tempLogofTime})
+    }
+    
   }
 
   componentWillUnmount() {
     this.removed3Tree();
   }
   removeHtml(){
-    if(this.state.htmlElement)  this.setState({htmlElement:false})
-    if(!this.state.htmlElement)  this.setState({htmlElement:true})
+    const state=this.state
+    if(this.state.htmlElement)  this.setState({...state,htmlElement:false})
+    if(!this.state.htmlElement)  this.setState({...state,htmlElement:true})
   }
+  handelPlay(value){
+    let temp=this.state.index
+    if(!value){
+      temp+=1
+      this.setState({index:temp})
+    }else{
+      this.setState({index:1})
+    }
+  }
+
   removed3Tree() {
     const { current } = this.treeRef;
     document.querySelectorAll('.tooltip').forEach(el => el.remove());
@@ -49,7 +73,7 @@ export default class D3Tree extends Component {
 
   tree(data) {
     if(this.state.htmlElement){
-       data = deleteHtmlElement(data)
+      data = deleteHtmlElement(data)
       const root = d3.hierarchy(data);
       root.dx = 10;
       root.dy = this.width / (root.height + 1);
@@ -187,11 +211,16 @@ export default class D3Tree extends Component {
 
   render() {
     return (
-      <div className="container" id="tree-container">
-        <button className='graph-title' onClick={this.removeHtml} >Hide HTML </button>
-        <h3 className="graph-title">Render Times Tree Graph</h3>
-        <div className="graphDiv" ref={this.treeRef}></div>
-        <TimeTravel oldState={this.props.oldState}/>
+      <div className='hello' >
+        <div className="container" id="tree-container">
+          <button className='graph-title' onClick={this.removeHtml} >Hide HTML </button>
+          <h3 className="graph-title">Render Times Tree Graph</h3>
+          <div className="graphDiv" ref={this.treeRef}></div>
+        </div>
+        <TimeTravel currentState={this.props.oldState} 
+                    handelPlay={this.handelPlay} 
+                    logofTime ={this.state.logofTime} 
+                    index={this.state.index}/>
       </div>
     )
   }

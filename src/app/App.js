@@ -12,25 +12,29 @@ export default class App extends Component {
       name: '',
       children: [],
       stats: '',
-      value: 0
+      value: 0,
+      oldState:[]
     };
   }
-
+  
   componentDidMount() {
     if (!port) port = chrome.runtime.connect();
-
+    
     port.onMessage.addListener((message) => {
-      console.log('message', message);
+      let array=this.state.oldState
+      array.push(message.payload.payload)
       this.setState({
         value: message.payload.payload.value,
         name: message.payload.payload.name,
         children: message.payload.payload.children,
         stats: message.payload.payload.stats,
+        oldstate:array
       });
     });
   }
-
+  
   render() {
+    
     return (
       <div>
         <MainContainer
@@ -38,6 +42,7 @@ export default class App extends Component {
           name={this.state.name}
           children={this.state.children}
           stats={this.state.stats}
+          oldState={this.state.oldState}
         />
       </div>
     );
