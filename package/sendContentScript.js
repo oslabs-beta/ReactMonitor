@@ -1,4 +1,8 @@
-module.exports = function (treeCreator, prevTree, currentTree){
+module.exports = function(treeCreator, prevTree, currentTree)
+{
+	const treeGraph = treeCreator(currentTree);
+	window.postMessage({ action: 'npmToContent', payload: treeGraph });
+/*
       // do this on first load
       if (currentTree === undefined){
         const treeGraph = treeCreator(prevTree);
@@ -8,4 +12,5 @@ module.exports = function (treeCreator, prevTree, currentTree){
         const treeGraph = treeCreator(currentTree);
         window.postMessage({ action: 'npmToContent', payload: treeGraph });
       }
+*/
 }
