@@ -16,6 +16,7 @@ export default class D3Tree extends Component {
       index:0,
       logofTime:[],
       playing:false
+      
     }
     this.treeRef = React.createRef();
     this.maked3Tree = this.maked3Tree.bind(this);

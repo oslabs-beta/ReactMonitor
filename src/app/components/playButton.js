@@ -6,7 +6,8 @@ export default class playButton extends Component {
         
         this.state = {
           percentage: 0,
-          play:false
+          play:false,
+          pause:false
         }
         
         this.nextStep = this.nextStep.bind(this)
@@ -14,19 +15,21 @@ export default class playButton extends Component {
       
       nextStep() {
         if(this.state.percentage === 100) return 
-
         let timer = setInterval(() => {
-          if(this.state.percentage===0){
-            this.setState(prevState => ({ percentage: prevState.percentage + (100/this.props.length) }))
-          }
-          if(this.state.percentage >= 95) {
-            this.setState(prevState => ({ percentage:100 }))
-            this.props.handelPlay('stop')
-            clearInterval(timer)
-          }else{
-            this.props.handelPlay()
-            this.setState(prevState => ({ percentage: prevState.percentage + (100/this.props.length) }))
-          }
+          if(!this.state.pause){
+            if(this.state.percentage===0){
+              this.setState(prevState => ({ percentage: prevState.percentage + (100/this.props.length) }))
+            }
+            if(this.state.percentage >= 95) {
+              this.setState(prevState => ({ percentage:100 }))
+              this.props.handelPlay('stop')
+              clearInterval(timer)
+            }else{
+              this.props.handelPlay()
+              this.setState(prevState => ({ percentage: prevState.percentage + (100/this.props.length) }))
+            }
+            
+          }else clearInterval(timer)
         }, 1000);
       }
       
@@ -34,7 +37,10 @@ export default class playButton extends Component {
         return (
             <div>
                 <div style={{ marginTop: '20px' }}>  
-                    <button onClick={this.nextStep}>play</button>  
+                    <button onClick={()=>{
+                      this.setState({pause:false})
+                      this.nextStep()
+                    }}>play</button>  
                 </div>
                 <div style={{
                     position: 'relative',
@@ -52,11 +58,17 @@ export default class playButton extends Component {
                 </div>
                 <div style={{ marginTop: '20px' }}>
                     <button  onClick={() => {
-                      console.log('reset')
+                      
                       this.props.handelPlay('reset')
                       this.setState({ percentage: 0 })
+                      this.setState({ pause: true })
                     }}>Reset</button>
                 </div>   
+                <div style={{ marginTop: '20px' }}>
+                    <button  onClick={() => {
+                      this.setState({ pause: true })
+                    }}>Pause</button>
+                </div>  
             </div>
         )
       }  
