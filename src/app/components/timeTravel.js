@@ -12,8 +12,12 @@ export default class timeTravel extends Component {
         return (
             <div className='timeTravel'>
             <div className='state-log'>
+                <div className='tree'>
                 <Record logofTime={this.props.logofTime} index={this.props.index}/>
+                </div>
+                <div className ='log'>
                 <Statechange currentState={this.props.currentState} index={this.props.index}/>
+                </div>
             </div>
             <Playbutton length={this.props.logofTime.length} index={this.props.index} handelPlay={this.props.handelPlay}/>
             </div>

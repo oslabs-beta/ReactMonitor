@@ -225,8 +225,8 @@ export default class D3Tree extends Component {
     return (
       <div className='hello' >
         <div className="container" id="tree-container">
-          <button className='graph-title' onClick={this.removeHtml} >Hide HTML </button>
-          <h3 className="graph-title">Render Times Tree Graph</h3>
+        <h3 className="graph-title">Render Times Tree Graph</h3>
+        <button style={{borderRadius:'10px', display:'flex',justifyContent:'flex-start'}} className='graph-title' onClick={this.removeHtml} >Hide HTML </button>
           <div className="graphDiv" ref={this.treeRef}></div>
         </div>
         <TimeTravel currentState={this.props.oldState} 

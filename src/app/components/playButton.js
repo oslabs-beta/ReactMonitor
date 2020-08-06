@@ -35,40 +35,39 @@ export default class playButton extends Component {
       
       render() {
         return (
-            <div>
-                <div style={{ marginTop: '20px' }}>  
-                    <button onClick={()=>{
-                      this.setState({pause:false})
-                      this.nextStep()
-                    }}>play</button>  
-                </div>
-                <div style={{
-                    position: 'relative',
-                    height: '20px',
-                    width: '350px',
-                    borderRadius: '50px',
-                    border: '1px solid #333',
-                  }}>
-                    <div  style={{ width: `${this.state.percentage}%`,
-                    background: '#1DA598',
-                    height: '100%',
-                    borderRadius: 'inherit',
-                    transition: 'width .2s ease-in'
-                }} />
-                </div>
-                <div style={{ marginTop: '20px' }}>
-                    <button  onClick={() => {
-                      
-                      this.props.handelPlay('reset')
-                      this.setState({ percentage: 0 })
-                      this.setState({ pause: true })
-                    }}>Reset</button>
-                </div>   
-                <div style={{ marginTop: '20px' }}>
-                    <button  onClick={() => {
-                      this.setState({ pause: true })
-                    }}>Pause</button>
-                </div>  
+            <div style={{display:'flex',justifyContent:'center',alignItems:'baseline',height:'50px',}}>
+            <div style={{display:'flex',justifyContent:'flex-end',height:'50px',width:'30%'}}>
+              <div style={{ marginTop: '20px', }}>  
+                  <button style={{borderRadius:'10px'}} onClick={()=>{
+                    this.setState({pause:false})
+                    this.nextStep()
+                  }}>Play</button>  
+              </div>
+              <div style={{ marginTop: '20px', }}>
+                  <button style={{borderRadius:'10px'}} onClick={() => {
+                    this.setState({ pause: true })
+                  }}>Pause</button>
+              </div>  
+            </div>
+            <div style={{display:'flex',justifyContent:'flex-start',alignItems:'baseline',height:'50px',width:'70%'}}>
+              <div style={{position: 'relative',height: '10px', width: '70%', borderRadius: '50px',border: '1px solid #333',marginTop:'20px'}}>
+                  <div  style={{ width: `${this.state.percentage}%`,
+                  background: '#1DA598',
+                  height: '100%',
+                  borderRadius: 'inherit',
+                  transition: 'width .2s ease-in'
+              }} />
+              </div>
+              <div style={{ marginTop: '20px',width:'10%',marginLeft:'10px' }}>
+                  <button style={{borderRadius:'10px'}} onClick={() => {
+                    
+                    this.props.handelPlay('reset')
+                    this.setState({ percentage: 0 })
+                    this.setState({ pause: true })
+                  }}>Reset</button>
+              </div>   
+            </div>
+            
             </div>
         )
       }  

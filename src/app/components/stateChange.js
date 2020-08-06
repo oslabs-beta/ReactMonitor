@@ -27,7 +27,6 @@ export default class stateChange extends Component {
           return (
               <div className="state-changes">
                   <div className="wrapper">
-                      <h1>Tree</h1>
                       <ComponentsList2 
                           components={[current]} 
                           onChange={(selectedcomponents) => this.setState({selectedcomponents})}
@@ -111,7 +110,7 @@ class Checkbox2 extends Component {
           for(let key in value){
             if(typeof value[key] ==='object' && value[key] !=null) temp.push(this.creatlistState(value[key]))
             if(value[key]===null || value[key]=='null' || this.props.label=='UserTable') temp.push(<li key={'state' + temp.length}>{key}: null</li>)
-            if(typeof value[key] !=='object') temp.push(<li key={'state'+temp.length}>{key}: {`${value[key]}`}</li>)
+            if(typeof value[key] !=='object') temp.push(<li key={'state'+temp.length}>{key}:<span className='span'>{`${value[key]}`}</span> </li>)
           }
           return temp
           }else if(Array.isArray(value)){
@@ -130,7 +129,7 @@ class Checkbox2 extends Component {
             for(let key in value){
               if(typeof value[key] ==='object' && value[key] !=null) temp.push(this.creatlistProps(value[key]))
               if(value[key]===null || value[key]=='null') temp.push(<li key={'props'+temp.length}>{key}: null</li>)
-              if(typeof value[key] !=='object'  )temp.push(<li key={'props'+temp.length}>{`${key}`}: {`${value[key]}`}</li>)
+              if(typeof value[key] !=='object'  )temp.push(<li key={'props'+temp.length}>{`${key}`}: <span className="span">{`${value[key]}`}</span></li>)
             }
             return temp
           }else{
@@ -151,8 +150,8 @@ class Checkbox2 extends Component {
         return (
             <div className="checkbox">  
             <div className="checkbox__label" onClick={() => this.props.onChange(!this.props.selected)}>{this.props.label}</div>
-            <ul>State: {(state==null ||  state ==='null')?'':state}</ul>
-            <ul>Props: {(props==null ||  state ==='null')?'':props}</ul>
+            <li>State: {(state==null ||  state ==='null')?'':state}</li>
+            <li>Props: {(props==null ||  state ==='null')?'':props}</li>
           </div>
         )
     }
