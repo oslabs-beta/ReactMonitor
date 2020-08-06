@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import {deleteHtmlElement} from './helperFunctions'
-import {componenetChangedState} from './helperFunctions'
+import {deleteHtmlElement, fixState,componenetChangedState} from './helperFunctions'
+// import {componenetChangedState} from './helperFunctions'
 
 export default class stateChange extends Component {
     constructor(props){
@@ -14,13 +14,16 @@ export default class stateChange extends Component {
       const {index} = this.props
       let current=this.props.currentState[index]
       let temp= JSON.parse(JSON.stringify(current? [current]:this.props.currentState))
+      console.log('buatad',this.props.currentState)
       temp = componenetChangedState(deleteHtmlElement(temp))
+
+      temp =fixState(temp? temp:'nothing')
       return temp
     }
     render() {
+      if(this.props.currentState[this.props.index]){
         const {selectedcomponents} = this.state;
-        let current=this.cleanTree()
-        if(this.props.currentState[this.props.index]){
+          let current=this.cleanTree()
           return (
               <div className="container">
                   <div className="wrapper">
@@ -60,14 +63,15 @@ const ComponentsList2 = ({ components, selectedcomponents, onChange, isFirst, de
       selectedcomponents[componentId] = subSelections;
       onChange(selectedcomponents);
     }
-    console.log('comp',components)
+    
     let counter=0
     return (
       <div>
         {components.map(component => (
             <ul className={isFirst && "firstUL"}>
               <Checkbox2 
-                stats={component.stats}
+                state={component.state}
+                props={component.props}
                 selected={selectedcomponents[component.name]} 
                 label={component.name} 
                 onChange={() => {handleCheckboxClicked(component.name)}}
@@ -99,15 +103,56 @@ class Checkbox2 extends Component {
             this.props.onChange(!this.props.selected)
         //     this.setState({didmount:false})
         // }
+      }
+      creatlistState(value){
+        const temp=[]
+        if(value !== null){
+          if(!Array.isArray(value) && value!== null && value !== undefined && Object.getPrototypeOf(value).isPrototypeOf(Object)){
+          for(let key in value){
+            if(typeof value[key] ==='object' && value[key] !=null) temp.push(this.creatlistState(value[key]))
+            if(value[key]===null || value[key]=='null' || this.props.label=='UserTable') temp.push(<li key={'state' + temp.length}>{key}: null</li>)
+            if(typeof value[key] !=='object') temp.push(<li key={'state'+temp.length}>{key}: {`${value[key]}`}</li>)
+          }
+          return temp
+          }else if(Array.isArray(value)){
+              for(let i=0;i<value.length;i++){
+                if(typeof value[i] ==='object') temp.push(this.creatlistProps(value[i]))
+              }
+            }
+            return temp
+      }
+      return temp
     }
+    creatlistProps(value){
+      const temp = []
+        if(value !== null){
+          if(!Array.isArray(value)){
+            for(let key in value){
+              if(typeof value[key] ==='object' && value[key] !=null) temp.push(this.creatlistProps(value[key]))
+              if(value[key]===null || value[key]=='null') temp.push(<li key={'props'+temp.length}>{key}: null</li>)
+              if(typeof value[key] !=='object'  )temp.push(<li key={'props'+temp.length}>{`${key}`}: {`${value[key]}`}</li>)
+            }
+            return temp
+          }else{
+            for(let i=0;i<value.length;i++){
+              if(typeof value[i] ==='object') temp.push(this.creatlistProps(value[i]))
+              // if(value[i]===null) temp.push(<li key={'props'+temp.length}>{key}: {'null'}</li>)
+              // else temp.push(<li key={'props'+temp.length}>{key}: {`${value[i]}`}</li>)
+            }
+          }
+          return temp
+    }
+    return temp
+  }
     render(){
-        console.log('state',this.props.state)
-        console.log('props',this.props.state)
+      
+        const state= (this.props.state !==null)? this.creatlistState(this.props.state):[]
+        const props= (this.props.props !==null)? this.creatlistProps(this.props.props):[]
         return (
             <div className="checkbox">  
             <div className="checkbox__label" onClick={() => this.props.onChange(!this.props.selected)}>{this.props.label}</div>
-            <h5>State:{this.props.state}</h5>
-            <h5>Props:{this.props.props}</h5>
+            <ul>State: {(state==null ||  state ==='null')?'':state}</ul>
+            <ul>Props: {(props==null ||  state ==='null')?'':props}</ul>
           </div>
         )
     }

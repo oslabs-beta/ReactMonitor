@@ -30,12 +30,12 @@ const deleteHtmlElement=(obj)=>{
 }
 
 const componenetChangedState = (data) => {
-
+    
     if(!data) return 
     
     const noChanges=[]
     const helper = (obj) =>{
-        // console.log('obj',obj)
+        console.log('apppppppppppppppp1ppppppp',obj)
         if(!obj.children.length) {
             if(obj.nodeSvgShape.shapeProps.fill==='lightgreen'){
                 obj.state=obj.stats.state
@@ -56,7 +56,7 @@ const componenetChangedState = (data) => {
             if(obj.name==='ButtonPanel') console.log('target',obj)
             let run =true
             if(run){
-                if(obj.nodeSvgShape.shapeProps.fill==='lightgreen'){
+                if(obj.nodeSvgShape.shapeProps.fill==='lightgreen' ){
                     obj.state=obj.stats.state
                     obj.props=obj.stats.props
                     obj.time=obj.stats.value
@@ -88,9 +88,9 @@ const componenetChangedState = (data) => {
                     helper(obj.children[i])
                 } else {
                     if(obj.children[i].nodeSvgShape.shapeProps.fill==='lightgreen' )  {helper(obj.children[i])}
-                else{
-                    delete obj.children[i]
-                }
+                    else{
+                        delete obj.children[i]
+                    }
                 }
             }
         }
@@ -98,36 +98,67 @@ const componenetChangedState = (data) => {
     helper(data)
     return data
 }
-// const obj4={
-//     name:'test',
-//     nodeSvgShape:{shapeProps:{fill:'red'}},
-//     stats:{state:'state did not',props:'props did not '},
-//     children:[]
-// }
-// const obj5={
-//     name:'test2',
-//     nodeSvgShape:{shapeProps:{fill:'lightgreen'}},
-//     stats:{state:'I chabged',props:'I changed'},
-//     children:[]
-// }
-// const obj2={
-//    name:'button',
-//    nodeSvgShape:{shapeProps:{fill:'lightgreen'}},
-//    stats:{state:'I changed',props:'Ii changed'},
-//    children:[obj4,obj5]
-// }
-// const obj3={
-//     name:'display',
-//     nodeSvgShape:{shapeProps:{fill:'red'}},
-//     stats:{state:'I amhere',props:'Iama a prop'},
-//     children:[obj4,obj5]
-// }
-//  const obj1={
-//      name:'app',
-//      nodeSvgShape:{shapeProps:{fill:'lightgreen'}},
-//      stats:{state:'I changed',props:'I i changed'},
-//      children:[obj2,obj3,obj2,obj3]
-//  }
-// console.log(componenetChangedState(obj1))
+const fixState = (obj)=>{
+if(obj==='nothing' || typeof obj!='object' || obj==={}) return
+    if(typeof obj.state == 'string' ){
+        let tempState = JSON.parse(obj.state)
+        if(tempState != null){
+            if(tempState.memoizedState){
+                let memoizedState= tempState.memoizedState
+                obj.state=memoizedState.memoizedState
+            }else obj.state=tempState
+        }
+    }if(typeof obj.props =='string'){
+        let tempProps =JSON.parse(obj.props)
+        if(tempProps !=null )obj.props=tempProps
+    }
+        if(obj.children.length){
+            for (let i=0;i<obj.children.length;i+=1){
+                fixState(obj.children[i])
+            }
+        }
+        return obj
+}
 
-export {deleteHtmlElement,componenetChangedState }
+const fixTreeState=(obj)=>{
+    if(obj==='nothing' || typeof obj!='object' || obj==={}) return
+    if(typeof obj.stats == 'string' ){
+        let tempState = JSON.parse(obj.state)
+        if(tempState != null){
+            if(tempState.memoizedState){
+                let memoizedState= tempState.memoizedState
+                obj.state=memoizedState.memoizedState
+            }else obj.state=tempState
+        }
+    }if(typeof obj.props =='string'){
+        let tempProps =JSON.parse(obj.props)
+        if(tempProps !=null )obj.props=tempProps
+    }
+        if(obj.children.length){
+            for (let i=0;i<obj.children.length;i+=1){
+                fixTreeState(obj.children[i])
+            }
+        }
+      
+} 
+// let obj2={
+//     name:'obj2',
+//     state:JSON.stringify({hello:1}),
+//     props:JSON.stringify({him:2}),
+//     children:[]
+//   }
+  
+//   let obj1={
+//     name:'obj1',
+//     state:JSON.stringify({hello:1}),
+//     props:JSON.stringify({him:2}),
+//     children:[obj2]
+//   }
+//   let obj={
+//     name:'obj',
+//     state:JSON.stringify({hello:1}),
+//     props:JSON.stringify({him:2}),
+//     children:[obj1,obj2]
+//   }
+//   console.log(fixState(obj))
+export {deleteHtmlElement,componenetChangedState,fixState }

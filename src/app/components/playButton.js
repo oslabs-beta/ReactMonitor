@@ -19,7 +19,8 @@ export default class playButton extends Component {
           if(this.state.percentage===0){
             this.setState(prevState => ({ percentage: prevState.percentage + (100/this.props.length) }))
           }
-          if(this.state.percentage >= 100) {
+          if(this.state.percentage >= 95) {
+            this.setState(prevState => ({ percentage:100 }))
             this.props.handelPlay('stop')
             clearInterval(timer)
           }else{
