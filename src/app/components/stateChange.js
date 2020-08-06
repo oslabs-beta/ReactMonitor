@@ -25,7 +25,7 @@ export default class stateChange extends Component {
         const {selectedcomponents} = this.state;
           let current=this.cleanTree()
           return (
-              <div className="container">
+              <div className="state-changes">
                   <div className="wrapper">
                       <h1>Tree</h1>
                       <ComponentsList2 
