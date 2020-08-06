@@ -120,45 +120,4 @@ if(obj==='nothing' || typeof obj!='object' || obj==={}) return
         return obj
 }
 
-const fixTreeState=(obj)=>{
-    if(obj==='nothing' || typeof obj!='object' || obj==={}) return
-    if(typeof obj.stats == 'string' ){
-        let tempState = JSON.parse(obj.state)
-        if(tempState != null){
-            if(tempState.memoizedState){
-                let memoizedState= tempState.memoizedState
-                obj.state=memoizedState.memoizedState
-            }else obj.state=tempState
-        }
-    }if(typeof obj.props =='string'){
-        let tempProps =JSON.parse(obj.props)
-        if(tempProps !=null )obj.props=tempProps
-    }
-        if(obj.children.length){
-            for (let i=0;i<obj.children.length;i+=1){
-                fixTreeState(obj.children[i])
-            }
-        }
-      
-} 
-// let obj2={
-//     name:'obj2',
-//     state:JSON.stringify({hello:1}),
-//     props:JSON.stringify({him:2}),
-//     children:[]
-//   }
-  
-//   let obj1={
-//     name:'obj1',
-//     state:JSON.stringify({hello:1}),
-//     props:JSON.stringify({him:2}),
-//     children:[obj2]
-//   }
-//   let obj={
-//     name:'obj',
-//     state:JSON.stringify({hello:1}),
-//     props:JSON.stringify({him:2}),
-//     children:[obj1,obj2]
-//   }
-//   console.log(fixState(obj))
 export {deleteHtmlElement,componenetChangedState,fixState }

@@ -85,7 +85,6 @@ export default class D3Tree extends Component {
   tree(data) {
     if(this.state.htmlElement){
       data = deleteHtmlElement(data)
-      // data= fixState(data)
       console.log(data)
       const root = d3.hierarchy(data);
       root.dx = 10;
