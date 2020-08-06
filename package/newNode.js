@@ -6,8 +6,9 @@ function Node(name, parent, children, fiber) {
       this.parent = parent;
       this.value = Number(fiber.actualDuration.toFixed(2));
       this.children = children;
+      console.log('from fiber',fiber)
       this.stats = {
-        state: JSONStringify(fiber.memoizedState),
+        state: JSON.stringify((fiber.memoizedState)?( (fiber.memoizedState.memoizedState)?fiber.memoizedState.memoizedState: fiber.memoizedState):fiber.memoizedState ),
         props: JSONStringify(fiber.memoizedProps),
         effectTag: fiber.effectTag,
         type: typeof fiber.type,

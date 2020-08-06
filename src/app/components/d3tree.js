@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
 import TimeTravel from './timeTravel';
-import {deleteHtmlElement} from './helperFunctions'
-import {componenetChangedState} from './helperFunctions'
+import {deleteHtmlElement,fixState} from './helperFunctions'
+// import {fixState} from './helperFunctions'
 
 let root;
 
@@ -16,6 +16,7 @@ export default class D3Tree extends Component {
       index:0,
       logofTime:[],
       playing:false
+      
     }
     this.treeRef = React.createRef();
     this.maked3Tree = this.maked3Tree.bind(this);
@@ -84,6 +85,7 @@ export default class D3Tree extends Component {
   tree(data) {
     if(this.state.htmlElement){
       data = deleteHtmlElement(data)
+      console.log(data)
       const root = d3.hierarchy(data);
       root.dx = 10;
       root.dy = this.width / (root.height + 1);
@@ -223,8 +225,8 @@ export default class D3Tree extends Component {
     return (
       <div className='hello' >
         <div className="container" id="tree-container">
-          <button className='graph-title' onClick={this.removeHtml} >Hide HTML </button>
-          <h3 className="graph-title">Render Times Tree Graph</h3>
+        <h3 className="graph-title">Render Times Tree Graph</h3>
+        <button style={{borderRadius:'10px', display:'flex',justifyContent:'flex-start'}} className='graph-title' onClick={this.removeHtml} >Hide HTML </button>
           <div className="graphDiv" ref={this.treeRef}></div>
         </div>
         <TimeTravel currentState={this.props.oldState} 
