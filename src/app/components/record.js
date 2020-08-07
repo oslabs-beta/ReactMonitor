@@ -7,15 +7,18 @@ export default class record extends Component {
     render() {
         if(this.props.logofTime){
             return (
-                <ul style={{marginLeft:'-50px',}}>
-                    {this.props.logofTime.map((elem,i) =>{
-                        if(this.props.index===i){
-                           return <li key={i}><mark>Name:{elem[0]}   Time:{elem[1]}</mark></li>
-                        }else{
-                           return  <li key={i}>Name:{elem[0]}   Time:{elem[1]}</li>
-                        }
-                        })}
-                </ul>
+                <div>
+                <h2 className='graph-title'>Time</h2>
+                    <ul>
+                        {this.props.logofTime.map((elem,i) =>{
+                            if(this.props.index===i){
+                            return <li key={i}><span id='highlight'>Name:{elem[0]}   Time:{elem[1]}</span></li>
+                            }else{
+                            return  <li key={i}>Name:{elem[0]}   Time:{elem[1]}</li>
+                            }
+                            })}
+                    </ul>
+                </div>
             )
         }else{
             return (

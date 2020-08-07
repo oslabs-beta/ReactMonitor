@@ -25,6 +25,8 @@ export default class stateChange extends Component {
         const {selectedcomponents} = this.state;
           let current=this.cleanTree()
           return (
+            <div>
+            <h2 className='graph-title'>State Diff</h2>
               <div className="state-changes">
                   <div className="wrapper">
                       <ComponentsList2 
@@ -35,6 +37,7 @@ export default class stateChange extends Component {
                       />
                   </div>
               </div>
+            </div>
           )
         }else{
           return (
@@ -128,7 +131,7 @@ class Checkbox2 extends Component {
           if(!Array.isArray(value)){
             for(let key in value){
               if(typeof value[key] ==='object' && value[key] !=null) temp.push(this.creatlistProps(value[key]))
-              if(value[key]===null || value[key]=='null') temp.push(<li key={'props'+temp.length}>{key}: null</li>)
+              if(value[key]===null || value[key]=='null') temp.push(<li key={'props'+temp.length}>{key}:</li>)
               if(typeof value[key] !=='object'  )temp.push(<li key={'props'+temp.length}>{`${key}`}: <span className="span">{`${value[key]}`}</span></li>)
             }
             return temp
@@ -148,11 +151,12 @@ class Checkbox2 extends Component {
         const state= (this.props.state !==null)? this.creatlistState(this.props.state):[]
         const props= (this.props.props !==null)? this.creatlistProps(this.props.props):[]
         return (
-            <div className="checkbox">  
-            <div className="checkbox__label" onClick={() => this.props.onChange(!this.props.selected)}>{this.props.label}</div>
-            <li>State: {(state==null ||  state ==='null')?'':state}</li>
-            <li>Props: {(props==null ||  state ==='null')?'':props}</li>
+          <div className="checkbox">  
+            <div className="checkbox__label"  onClick={() => this.props.onChange(!this.props.selected)}>{this.props.label}</div>
+            <li><span className='stateChangeTitles'> State </span> {(state==null ||  state ==='null')?'':state}</li>
+            <li><span className='stateChangeTitles'> Props </span> {(props==null ||  state ==='null')?'':props}</li>
           </div>
         )
     }
   }
+
