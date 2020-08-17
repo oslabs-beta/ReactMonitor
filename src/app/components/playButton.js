@@ -36,15 +36,15 @@ export default class playButton extends Component {
       render() {
         return (
             <div style={{display:'flex',justifyContent:'center',alignItems:'baseline',height:'50px',}}>
-            <div style={{display:'flex',justifyContent:'flex-end',height:'50px',width:'30%'}}>
-              <div style={{ marginTop: '20px', }}>  
-                  <button style={{borderRadius:'10px'}} onClick={()=>{
+            <div style={{display:'flex',justifyContent:'flex-end',height:'50px',width:'30%', marginRight:'10px'}}>
+              <div style={{ marginTop: '20px',  marginRight:'10px' }}>  
+                  <button style={{borderRadius: '10px', outline: 'none'}} onClick={()=>{
                     this.setState({pause:false})
                     this.nextStep()
                   }}>Play</button>  
               </div>
               <div style={{ marginTop: '20px', }}>
-                  <button style={{borderRadius:'10px'}} onClick={() => {
+                  <button style={{borderRadius: '10px', outline: 'none'}} onClick={() => {
                     this.setState({ pause: true })
                   }}>Pause</button>
               </div>  
@@ -59,7 +59,7 @@ export default class playButton extends Component {
               }} />
               </div>
               <div style={{ marginTop: '20px',width:'10%',marginLeft:'10px' }}>
-                  <button style={{borderRadius:'10px'}} onClick={() => {
+                  <button style={{borderRadius: '10px', outline: 'none'}} onClick={() => {
                     
                     this.props.handelPlay('reset')
                     this.setState({ percentage: 0 })
