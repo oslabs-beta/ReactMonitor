@@ -1,12 +1,12 @@
 const JSONStringify = require('./JSONStringify');
 
 function Node(name, parent, children, fiber) {
-
+  console.log(' fiber.actualDuration hi',fiber.actualDuration)
+  console.log(' fiber.actualStartTime hi',fiber.actualStartTime)
       this.name = name;
       this.parent = parent;
       this.value = Number(fiber.actualDuration.toFixed(2));
       this.children = children;
-      console.log('from fiber',fiber)
       this.stats = {
         state: JSON.stringify((fiber.memoizedState)?( (fiber.memoizedState.memoizedState)?fiber.memoizedState.memoizedState: fiber.memoizedState):fiber.memoizedState ),
         props: JSONStringify(fiber.memoizedProps),

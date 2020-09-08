@@ -1,5 +1,5 @@
-import {deleteHtmlElement, componentChangedState, fixState} from './helperFunctions'
-import mockData from '../../../mockData/devToolData';
+import {deleteHtmlElement, componentChangedState, fixState} from '../src/app/components/helperFunctions'
+import mockData from '../mockData/devToolData';
 describe('test deletteHtmlElemnet , componentChangedState, fixState', () => {
     
     it('test deleteHtmlElement', () => {

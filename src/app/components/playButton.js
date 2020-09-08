@@ -67,7 +67,6 @@ export default class playButton extends Component {
                   }}>Reset</button>
               </div>   
             </div>
-            
             </div>
         )
       }  
