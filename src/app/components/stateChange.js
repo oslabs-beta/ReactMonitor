@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import {deleteHtmlElement, fixState,componenetChangedState} from './helperFunctions'
-// import {componenetChangedState} from './helperFunctions'
+import {deleteHtmlElement, fixState,componentChangedState} from './helperFunctions'
+// import {componentChangedState} from './helperFunctions'
 
 export default class stateChange extends Component {
     constructor(props){
@@ -15,7 +15,7 @@ export default class stateChange extends Component {
       let current=this.props.currentState[index]
       let temp= JSON.parse(JSON.stringify(current? [current]:this.props.currentState))
       console.log('buatad',this.props.currentState)
-      temp = componenetChangedState(deleteHtmlElement(temp))
+      temp = componentChangedState(deleteHtmlElement(temp))
 
       temp =fixState(temp? temp:'nothing')
       return temp
