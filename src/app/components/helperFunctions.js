@@ -1,4 +1,4 @@
-const deleteHtmlElement=(obj)=>{
+const deleteHtmlElement = (obj)=>{
     const helper=(object)=>{
         if(!object.children) return 
         for(let i=0;i<object.children.length;i++){
@@ -28,14 +28,12 @@ const deleteHtmlElement=(obj)=>{
         return helper(obj)
     }
 }
-
-const componenetChangedState = (data) => {
-    
+/* This function is used to delete any coomponent that didn't changed state 
+before getting passed to the time travel display componet */
+const componentChangedState = (data) => {
     if(!data) return 
-    
     const noChanges=[]
     const helper = (obj) =>{
-        console.log('apppppppppppppppp1ppppppp',obj)
         if(!obj.children.length) {
             if(obj.nodeSvgShape.shapeProps.fill==='lightgreen'){
                 obj.state=obj.stats.state
@@ -50,21 +48,20 @@ const componenetChangedState = (data) => {
                     props:obj.stats.props,
                     time:obj.value
                 })
-                
             }
         }else{
-            if(obj.name==='ButtonPanel') console.log('target',obj)
+            // if(obj.name==='ButtonPanel') console.log('target',obj)
             let run =true
             if(run){
                 if(obj.nodeSvgShape.shapeProps.fill==='lightgreen' ){
-                    obj.state=obj.stats.state
-                    obj.props=obj.stats.props
-                    obj.time=obj.stats.value
+                    obj.state = obj.stats.state
+                    obj.props = obj.stats.props
+                    obj.time = obj.stats.value
                     delete obj.nodeSvgShape
                     delete obj.tag
                     delete obj.stats
-                    run =false
-                }else{
+                    run = false
+                } else {
                     noChanges.push({
                         name:obj.name,
                         state:obj.stats.state,
@@ -83,7 +80,6 @@ const componenetChangedState = (data) => {
                 }
             }
             for (let i=0;i<obj.children.length;i+=1){
-                // console.log(obj.children[i].children!==[])
                 if(obj.children[i].children.length){
                     helper(obj.children[i])
                 } else {
@@ -98,26 +94,26 @@ const componenetChangedState = (data) => {
     helper(data)
     return data
 }
-const fixState = (obj)=>{
-if(obj==='nothing' || typeof obj!='object' || obj==={}) return
-    if(typeof obj.state == 'string' ){
+const fixState = (obj) => { 
+if(obj === 'nothing' || typeof obj != 'object' || obj === {}) return
+    if( typeof obj.state == 'string' ){
         let tempState = JSON.parse(obj.state)
-        if(tempState != null){
-            if(tempState.memoizedState){
+        if( tempState != null ) {
+            if( tempState.memoizedState ){
                 let memoizedState= tempState.memoizedState
                 obj.state=memoizedState.memoizedState
-            }else obj.state=tempState
+            } else obj.state=tempState
         }
-    }if(typeof obj.props =='string'){
-        let tempProps =JSON.parse(obj.props)
-        if(tempProps !=null )obj.props=tempProps
+    } if ( typeof obj.props == 'string' ){
+        let tempProps = JSON.parse( obj.props )
+        if ( tempProps != null )obj.props=tempProps
     }
-        if(obj.children.length){
-            for (let i=0;i<obj.children.length;i+=1){
+        if ( obj.children.length ) {
+            for ( let i=0;i<obj.children.length;i+=1 ){
                 fixState(obj.children[i])
             }
         }
         return obj
 }
 
-export {deleteHtmlElement,componenetChangedState,fixState }
+export {deleteHtmlElement, componentChangedState, fixState}

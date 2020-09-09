@@ -11,7 +11,7 @@ module.exports = {
     child: {
         type: { name: "div"},
         tag: 1,
-        effectTag: 0,
+        effectTag: 2,
         actualDuration: 8.00,
         actualStartTime: 300,
         memorizedProps: {},
