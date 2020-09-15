@@ -1,14 +1,28 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
+import TimeTravel from './timeTravel';
+import {deleteHtmlElement,fixState} from './helperFunctions'
+// import {fixState} from './helperFunctions'
 
 let root;
+
 
 export default class D3Tree extends Component {
   constructor(props) {
     super(props);
+    this.state={
+      htmlElement:false,
+      timeTravel:[],
+      index:0,
+      logofTime:[],
+      playing:false
+      
+    }
     this.treeRef = React.createRef();
     this.maked3Tree = this.maked3Tree.bind(this);
     this.removed3Tree = this.removed3Tree.bind(this);
+    this.removeHtml=this.removeHtml.bind(this)
+    this.handelPlay=this.handelPlay.bind(this)
     this.width = 500
   }
 
@@ -18,17 +32,48 @@ export default class D3Tree extends Component {
     root = JSON.parse(JSON.stringify(hierarchy));
     this.maked3Tree(root);
   }
-
+  
   componentDidUpdate() {
-    const { name, children, stats } = this.props;
+    console.log('last one',this.props.oldState[this.state.index])
+    if(this.state.playing){
+      var { name, children, stats } = this.props.oldState[this.state.index];
+
+    }
+    if(!this.state.playing) var{ name, children, stats } = this.props.oldState[this.props.oldState.length-1];
+    
     const hierarchy = { name, children, stats };
     root = JSON.parse(JSON.stringify(hierarchy));
     this.maked3Tree(root);
+    if(this.state.timeTravel.length !==this.props.oldState.length){
+      let tempTimeTravel =[...this.props.oldState]
+      let tempLogofTime=[...this.state.logofTime]
+      tempLogofTime.push([this.props.oldState[this.props.oldState.length-1].name,this.props.oldState[this.props.oldState.length-1].value])
+      this.setState({timeTravel:tempTimeTravel,logofTime:tempLogofTime})
+    }
+    
   }
 
   componentWillUnmount() {
     this.removed3Tree();
   }
+  removeHtml(){
+    const state=this.state
+    if(this.state.htmlElement)  this.setState({...state,htmlElement:false})
+    if(!this.state.htmlElement)  this.setState({...state,htmlElement:true})
+  }
+  handelPlay(value){
+    let temp=this.state.index
+    if(!value){
+      temp+=1
+      this.setState({playing:true})
+      this.setState({index:temp})
+    }else if(value==='stop'){
+      return
+    }else{
+      this.setState({index:0})
+    }
+  }
+
   removed3Tree() {
     const { current } = this.treeRef;
     document.querySelectorAll('.tooltip').forEach(el => el.remove());
@@ -38,10 +83,19 @@ export default class D3Tree extends Component {
   }
 
   tree(data) {
-    const root = d3.hierarchy(data);
-    root.dx = 10;
-    root.dy = this.width / (root.height + 1);
-    return d3.tree().nodeSize([root.dx, root.dy])(root);
+    if(this.state.htmlElement){
+      data = deleteHtmlElement(data)
+      console.log(data)
+      const root = d3.hierarchy(data);
+      root.dx = 10;
+      root.dy = this.width / (root.height + 1);
+      return d3.tree().nodeSize([root.dx, root.dy])(root);
+    }else{
+     const root = d3.hierarchy(data);
+     root.dx = 10;
+     root.dy = this.width / (root.height + 1);
+     return d3.tree().nodeSize([root.dx, root.dy])(root);
+   }
   };
 
   maked3Tree(data) {
@@ -169,9 +223,16 @@ export default class D3Tree extends Component {
 
   render() {
     return (
-      <div className="container" id="tree-container">
-        <h3 className="graph-title">Render Times Tree Graph</h3>
-        <div className="graphDiv" ref={this.treeRef}></div>
+      <div >
+        <div className="container" id="tree-container">
+          <h3 className="graph-title">Render Times Tree Graph</h3>
+          <button style={{borderRadius:'10px', display:'flex',justifyContent:'flex-start'}} className='html-btn' onClick={this.removeHtml} >Hide HTML </button>
+          <div className="graphDiv" ref={this.treeRef}> </div>
+        </div>
+        <TimeTravel currentState={this.props.oldState} 
+                    handelPlay={this.handelPlay} 
+                    logofTime ={this.state.logofTime} 
+                    index={this.state.index}/>
       </div>
     )
   }

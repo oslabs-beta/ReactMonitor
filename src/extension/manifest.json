@@ -3,25 +3,15 @@
   "name": "React Monitor",
   "version": "0.0.0.1",
   "devtools_page": "devtools.html",
-  "permissions": [
-    "activeTab",
-    "contextMenus",
-    "<all_urls>"
-  ],
+  "permissions": ["activeTab", "contextMenus", "<all_urls>"],
   "content_scripts": [
     {
-      "matches": [
-        "<all_urls>"
-      ],
-      "js": [
-        "contentScript.js"
-      ]
+      "matches": ["<all_urls>"],
+      "js": ["contentScript.js"]
     }
   ],
   "background": {
-    "scripts": [
-      "backgroundScript.js"
-    ],
+    "scripts": ["backgroundScript.js"],
     "persistent": false
   },
   "icons": {
@@ -30,9 +20,8 @@
     "128": "./assets/rm-icon-128.png"
   },
   "externally_connectable": {
-    "ids": [
-      "*"
-    ]
+    "ids": ["*"]
   },
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": ["/containerWrapper.js", "/fiberTreeAnalyzer.js"]
 }
