@@ -21,7 +21,7 @@ describe('Time travel rendered correctly', () => {
             index = { props.index }
             />)
     })
-    xit('Timetravel rendered correctly', () => {
+    it('Timetravel rendered correctly', () => {
         expect(wrapper.type()).toEqual('div')
         expect(wrapper.find('Playbutton')).toEqual({})
         expect(wrapper.find('Record')).toEqual({})

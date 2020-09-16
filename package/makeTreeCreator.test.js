@@ -5,7 +5,7 @@ const fiber = require('../mockData/fiber');
 describe('test makeTreeCreator', () => {
 
 
-  xit('test makeTreeCreator returns a function', () => {
+  it('test makeTreeCreator returns a function', () => {
 
     const treeCreator = makeTreeCreator();
     const treeGraph = treeCreator(fiber);
@@ -14,7 +14,7 @@ describe('test makeTreeCreator', () => {
     expect( treeGraph.name ).toBe('div');
   });
 
-  xit('test makeTreeCreator has valid value', () => {
+  it('test makeTreeCreator has valid value', () => {
 
     const treeCreator = makeTreeCreator();
     const treeGraph = treeCreator(fiber);
