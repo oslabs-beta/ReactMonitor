@@ -1,23 +1,23 @@
 import React, { Component } from 'react'
 import StateAndProps from './stateAndProps'
 
-const ComponentsList = ({ components, selectedcomponents, onChange, isFirst, debug }) => {
+const ComponentsList = ({ components, selectedComponents, onChange, isFirst, debug }) => {
 
-    const handleStateAndPropsClicked = (selectedcomponentId) => {
+    const handleStateAndPropsClicked = (selectedComponentId) => {
   
-      if(selectedcomponents[selectedcomponentId]){
-        delete selectedcomponents[selectedcomponentId];
+      if(selectedComponents[selectedComponentId]){
+        delete selectedComponents[selectedComponentId];
       } else {
-        selectedcomponents[selectedcomponentId] = {}
+        selectedComponents[selectedComponentId] = {}
         
       }
       
-      onChange(selectedcomponents)
+      onChange(selectedComponents)
     }
     
-    const handleSubcomponentsListChange = (componentId, subSelections) => {
-      selectedcomponents[componentId] = subSelections;
-      onChange(selectedcomponents);
+    const handleSubComponentsListChange = (componentId, subSelections) => {
+      selectedComponents[componentId] = subSelections;
+      onChange(selectedComponents);
     }
     
     let counter=0
@@ -28,16 +28,16 @@ const ComponentsList = ({ components, selectedcomponents, onChange, isFirst, deb
               <StateAndProps 
                 state={component.state}
                 props={component.props}
-                selected={selectedcomponents[component.name]} 
+                selected={selectedComponents[component.name]} 
                 label={component.name} 
                 onChange={() => {handleStateAndPropsClicked(component.name)}}
               />
-              {(component.children.length > 0 && selectedcomponents[component.name]) &&
+              {(component.children.length > 0 && selectedComponents[component.name]) &&
                 <ComponentsList 
                   key={counter+=100}
                   components={component.children} 
-                  selectedcomponents={selectedcomponents[component.name]} 
-                  onChange={(subSelections) => handleSubcomponentsListChange(component.name, subSelections)}
+                  selectedComponents={selectedComponents[component.name]} 
+                  onChange={(subSelections) => handleSubComponentsListChange(component.name, subSelections)}
                 />
               }
             </ul>

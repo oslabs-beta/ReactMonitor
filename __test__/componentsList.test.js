@@ -9,7 +9,7 @@ describe(' ComponentsList component rendered correctly ', () => {
     let props = {
         components: [{children:[]}],
         onChange: () => true,
-        selectedcomponents: 0,
+        selectedComponents: 0,
         isFirst:true
     }
     wrapper = shallow(<ComponentsList {...props}/>)

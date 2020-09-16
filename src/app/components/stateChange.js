@@ -6,7 +6,7 @@ export default class stateChange extends Component {
     constructor(props){
         super(props)
         this.state = {
-            selectedcomponents: {},
+            selectedComponents: {},
             graph:[]
         }
     }
@@ -22,7 +22,7 @@ export default class stateChange extends Component {
     }
     render() {
       if(this.props.currentState[this.props.index]){
-        const {selectedcomponents} = this.state;
+        const {selectedComponents} = this.state;
           let current=this.cleanTree()
           return (
             <div>
@@ -31,8 +31,8 @@ export default class stateChange extends Component {
                   <div className="wrapper">
                       <ComponentsList 
                           components={[current]} 
-                          onChange={(selectedcomponents) => this.setState({selectedcomponents})}
-                          selectedcomponents={selectedcomponents} 
+                          onChange={(selectedComponents) => this.setState({selectedComponents})}
+                          selectedComponents={selectedComponents} 
                           isFirst={true}
                       />
                   </div>
