@@ -4,7 +4,7 @@ const treeGraphFactory = require('./treeGraphFactory');
 
 describe('test treeGraphFactory', () => {
 
-  xit('test treeGraph was created properly', () => {
+  it('test treeGraph was created properly', () => {
     
     const treeGraph = treeGraphFactory(fiber);
     expect(treeGraph.name).toBe('h1');
