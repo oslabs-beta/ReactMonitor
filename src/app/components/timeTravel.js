@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Playbutton from './playButton'
 import Record from './record'
 import Statechange from './stateChange'
-import {deleteHtmlElement} from './helperFunctions'
 
 export default class timeTravel extends Component {
     constructor(props) {
