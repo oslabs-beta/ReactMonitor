@@ -4,10 +4,26 @@ $tertiary-color: #8B85C1;
 $light-color: #D4CDF4;
 $other-color: #815E5B;
 
+$body-fontFamily: 'Nunito Sans', sans-serif;
+$D3graph-fontFamily: 'Roboto', sans-serif;
+$title--header-font: 'Roboto', sans-serif;
 
 body { 
   margin: 0;
   background: $tertiary-color;
+  font-family:$body-fontFamily ;
+
+}
+
+.stateChangeTitles {
+  font-size: 10px;
+  color: black;
+  font-family: sans-serif;
+  text-shadow: 0px 0px 1.5px white;
+}
+
+text{
+  font-family: $D3graph-fontFamily;
 }
 
 .navbar { 
@@ -65,8 +81,6 @@ body {
 }
 
 .graphDiv {
-  margin: 0 20px; 
-  padding: 0 20px;
   width: 100%;
   height: 100%;
 }
@@ -94,7 +108,110 @@ body {
   font-size: x-large;
 }
 
+.html-btn {
+  outline: none;
+  background-color: white;
+  color: $secondary-color;
+  box-shadow: 2px 3px 2px 0px $secondary-color;
+}
+
+.html-btn:hover {
+  background-color: darken(white, 15%);
+  cursor: pointer;
+}
+
 foreignObject {
   box-sizing: border-box;
   border: solid 1px $primary-color; 
+}
+
+.timeTravel{
+  display: flex;
+  flex-direction: column;
+  margin: 20px 30px; 
+  padding: 0px 0px 20px 0;
+  border: 1px solid $light-color;
+  background: $secondary-color;
+  border-radius: 10px;
+  -webkit-box-shadow: 4px 6px 4px 0px $secondary-color;
+  -moz-box-shadow: 4px 6px 4px 0px $secondary-color;
+  box-shadow: 4px 6px 4px 0px $secondary-color;
+  font-family: 'Roboto', sans-serif;
+  li{
+    list-style: none;
+    margin-left: 20Px ;
+  }
+
+}
+.span{
+  color: white;
+}
+
+.state-log{
+  display: grid;
+  grid-column-gap: 10px;
+  grid-template-columns: 60% 35%;
+  border: wheat;
+  background-color: #685155;
+  height: 375px;
+  padding: 0;
+  margin: 0;
+  margin: 10px 10px 10px 10px ;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+.log{
+  overflow:scroll;
+  padding: 0;
+  margin: 0;
+}
+
+.state-change{
+  overflow:scroll;
+  padding: 0;
+  margin: 0;
+}
+
+#highlight {
+    text-shadow: 0px 0px 1.5px red;
+}
+
+.checkbox .checkbox__label {
+  margin-left: 0;
+  padding-left: 0;
+  margin-right: 0;
+  padding-right: 0;
+  overflow:scroll;
+  color:black;
+  text-emphasis:bold ;
+  font-size: 10px;
+  font-family: sans-serif;
+  text-shadow: -1.25px 0 white, 0 1.25px white, 1.25px 0 white, 0 -1.25px white;
+
+}
+.checkbox .checkbox__label::before {
+  position: relative;
+  /* top: 3pt; Uncomment this to lower the icons as requested in comments*/
+  content: "";
+  display: inline-block;
+  /* By using an em scale, the arrows will size with the font */
+  width: 0.4em;
+  height: 0.4em;
+  border-right: 0.2em solid black;
+  border-top: 0.2em solid black;
+  transform: rotate(45deg);
+  margin-right: 0.5em;
+}
+.checkbox .checkbox__label:hover {
+  font-weight: bold;
+  // font-style: italic;
+}
+.graphs{
+  
+  display: flex;
+  text-align: center;
 }
